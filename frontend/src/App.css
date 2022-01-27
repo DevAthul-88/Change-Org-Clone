@@ -35,3 +35,7 @@
         margin-top:8rem !important;
     }
 }
+.btns > .btn{
+    border-radius:30px;
+    margin:.1rem;
+}
