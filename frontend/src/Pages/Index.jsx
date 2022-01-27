@@ -3,7 +3,7 @@ import IndexHeader from '../Components/IndexHeader'
 
 function Index() {
   return <div className="container">
-      <div>
+      <div id="indexHeader">
           <IndexHeader />
       </div>
   </div>;
