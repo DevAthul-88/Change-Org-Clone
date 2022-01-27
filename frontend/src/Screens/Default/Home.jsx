@@ -5,7 +5,8 @@ import Navbar from "../../Components/Navbar[initial]/Navbar";
 import Login from "../../Pages/Login";
 import SignUp from "../../Pages/SignUp";
 import StartPetition from "../../Pages/StartPetition";
-import petitionForm from "../../Pages/petitionForm";
+import PetitionForm from "../../Pages/petitionForm";
+import Category from '../../Pages/Category'
 
 function Home() {
   return (
@@ -15,7 +16,8 @@ function Home() {
       <Route path="/login" component={Login} />
       <Route path="/signup" component={SignUp} />
       <Route path="/start-a-petition" component={StartPetition} />
-      <Route path="/start-a-petition/:id">{(params) => <petitionForm id={params.id} />}</Route>
+      <Route path="/start-a-petition/:id">{params => <PetitionForm id={params.id} />}</Route>
+      <Route path="/category/:id">{params => <Category id={params.id} />}</Route>
     </div>
   );
 }

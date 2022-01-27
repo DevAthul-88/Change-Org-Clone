@@ -52,7 +52,7 @@ function StartPetition() {
       </div>
 
       <button
-        className="btn btn-danger btn_red mt-4 ml-auto"
+        className="btn btn-danger btn_red  float-end"
         onClick={() => nextFunc()}
         disabled={key == "" ? "disabled" : null}
       >
