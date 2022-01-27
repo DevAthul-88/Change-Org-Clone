@@ -5,7 +5,7 @@ import Recent from "../Components/Petitions/Recent";
 import Victorys from "../Components/Petitions/Victorys";
 
 function Browse() {
-  const [route, setRoute] = useState("");
+  const [route, setRoute] = useState("featured");
 
   function setKey(key) {
     setRoute(key);
@@ -84,7 +84,9 @@ function Browse() {
           </ul>
         </div>
       </div>
+      <div className="container mt-5">
       <Main />
+      </div>
     </div>
   );
 }
