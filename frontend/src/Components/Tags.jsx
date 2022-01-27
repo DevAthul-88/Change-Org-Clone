@@ -2,7 +2,7 @@ import React from "react";
 
 function Tags() {
   return (
-    <div>
+    <div className=" fixed">
       <h4>Topics</h4>
       <div className="btns mt-2">
         <a href="" className="btn btn-outline-dark">Women's rights</a>
