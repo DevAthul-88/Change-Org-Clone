@@ -1,15 +1,26 @@
 import React from "react";
-import { Link } from "wouter";
+import {Link} from 'wouter'
 
-function Login() {
+function SignUp() {
   return (
     <div className="container mt-5">
       <div className="row ">
         <div className=" col-md-6 offset-md-3">
-          <h1 className="mb-4 ">Login</h1>
+          <h1 className="mb-4 ">SignUp</h1>
 
           <div className="form">
             <form>
+
+            <div className="mb-3">
+                <label className="form-label">Username</label>
+                <input
+                  type="email"
+                  className="form-control"
+                  id="exampleInputEmail1"
+                  aria-describedby="emailHelp"
+                />
+              </div>
+
               <div className="mb-3">
                 <label className="form-label">Email address</label>
                 <input
@@ -35,11 +46,11 @@ function Login() {
               </button>
             </form>
 
-            <Link href="/signup">
-              <a className="redColor mt-3 d-block">
-                Don't have and account?, Create one now
-              </a>
-            </Link>
+           <Link href="/login">
+           <a  className="redColor mt-3 d-block">
+           Already have an account? Login Now
+            </a>
+           </Link>
           </div>
         </div>
       </div>
@@ -47,4 +58,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default SignUp;
