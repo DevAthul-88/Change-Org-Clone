@@ -6,7 +6,7 @@ function Login() {
     <div className="container mt-5">
       <div className="row ">
         <div className=" col-md-6 offset-md-3">
-          <h1 className="mb-4 ">Login</h1>
+          <h1 className="mb-4 rubik">Login</h1>
 
           <div className="form">
             <form>

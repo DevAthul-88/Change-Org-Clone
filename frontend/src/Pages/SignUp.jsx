@@ -6,7 +6,7 @@ function SignUp() {
     <div className="container mt-5">
       <div className="row ">
         <div className=" col-md-6 offset-md-3">
-          <h1 className="mb-4 ">SignUp</h1>
+          <h1 className="mb-4 rubik">SignUp</h1>
 
           <div className="form">
             <form>
