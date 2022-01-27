@@ -43,4 +43,8 @@
 #card{
     background: #fdf9f2 ;
     border: 1px solid #d3bb91;
+    cursor: pointer;
+}
+#card:hover{
+    background: #ecdbbd;
 }
