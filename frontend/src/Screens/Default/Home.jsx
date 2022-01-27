@@ -7,6 +7,7 @@ import SignUp from "../../Pages/SignUp";
 import StartPetition from "../../Pages/StartPetition";
 import PetitionForm from "../../Pages/petitionForm";
 import Category from '../../Pages/Category'
+import Browse from '../../Pages/Browse'
 
 function Home() {
   return (
@@ -18,6 +19,7 @@ function Home() {
       <Route path="/start-a-petition" component={StartPetition} />
       <Route path="/start-a-petition/:id">{params => <PetitionForm id={params.id} />}</Route>
       <Route path="/category/:id">{params => <Category id={params.id} />}</Route>
+      <Route path="/petitions" component={Browse} />
     </div>
   );
 }

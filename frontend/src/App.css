@@ -48,3 +48,11 @@
 #card:hover{
     background: #ecdbbd;
 }
+.tab-link.active{
+    color:var(--red) !important;
+    border-bottom: 2px solid var(--red);
+}
+.tab-link{
+    font-family:var(--rubik);
+    font-weight:bold;
+}
