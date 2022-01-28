@@ -4,7 +4,7 @@ import HomeProtected from './Screens/Auth/Home'
 import HomeDefault from './Screens/Default/Home'
 
 function App() {
-  const [auth , setAuth] = useState(false);
+  const [auth , setAuth] = useState(true);
   return (
     <div className="App">
      {
