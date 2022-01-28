@@ -1,4 +1,5 @@
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken")
 const userSchema = require("../model/userModel");
 const generateToken = require("../token/token");
 const { loginSchema, registerSchema } = require("../validate/auth");
@@ -58,6 +59,26 @@ const userCtrl = {
       res.json({ error: error.message });
     }
   },
+
+  verify: async (req , res) => {
+    try {
+      
+      const {token} = req.body
+
+      const verified = await jwt.verify(token , process.env.TOken , (err ,  data) => {
+        if(err) return 'Unable to verify token.'
+ 
+        return data
+        
+      })
+      console.log(verified);
+
+
+
+    } catch (error) {
+      res.json({error:error.message});
+    }
+  }
 };
 
 module.exports = userCtrl;

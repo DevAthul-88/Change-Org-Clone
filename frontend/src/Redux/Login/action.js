@@ -8,14 +8,14 @@ const loginAction = (credentials) => async (dispatch) => {
     const { data } = await axios.post("/api/user/login", credentials);
 
     if (data.error) {
-      dispatch({ type: LOGIN_ERROR, error: data.error });
+      dispatch({ type: LOGIN_ERROR, payload: data.error });
     }
     if (data.token) {
       dispatch({ type: LOGIN_SUCCESS });
       localStorage.setItem("token", data.token);
     }
   } catch (error) {
-    dispatch({ type: LOGIN_ERROR, error: error.message });
+    dispatch({ type: LOGIN_ERROR, payload: error.message });
   }
 };
 export default loginAction

@@ -2,10 +2,25 @@ import React from "react";
 import { Link } from "wouter";
 import { Formik } from "formik";
 import LoginSchema from "../Schema/Login";
+import { useDispatch, useSelector } from "react-redux";
+import loginAction from "../Redux/Login/action";
 
 function Login() {
+
+
+  const state = useSelector(state => state.login)
+  const dispatch = useDispatch()
+
+  console.log(state);
   return (
     <div className="container mt-5">
+      {
+        state.error && (
+          <div className="alert alert-danger" role="alert">
+ {state.error}
+</div>
+        )
+      }
       <div className="row ">
         <div className=" col-md-6 offset-md-3">
           <h1 className="mb-4 rubik">Login</h1>
@@ -15,7 +30,8 @@ function Login() {
               initialValues={{ email: "", password: "" }}
               validationSchema={LoginSchema}
               onSubmit={(values, { setSubmitting }) => {
-                console.log(values);
+                dispatch(loginAction(values))
+                
               }}
             >
               {({
@@ -67,9 +83,11 @@ function Login() {
 
                   <button
                     className="btn btn-danger btn_red"
-                    disabled={isSubmitting}
+                    disabled={state.error ? false : isSubmitting}
                   >
-                    <strong>Login</strong>
+                    <strong>
+                      {state.loading ? 'Loading...' : 'Login'}
+                    </strong>
                   </button>
                 </form>
               )}
