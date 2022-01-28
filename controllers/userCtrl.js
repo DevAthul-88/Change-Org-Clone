@@ -1,18 +1,24 @@
-const joi = require("joi");
 const bcrypt = require("bcrypt");
 const userSchema = require("../model/userModel");
-
-const loginSchema = joi.object({
-  email: joi
-    .string()
-    .email({ minDomainSegments: 2, tlds: { allow: ["com", "net"] } }),
-  // password: joi.string().pattern(new RegExp("^[a-zA-Z0-9]{3,30}$")).min(6).max(12),
-});
+const generateToken = require("../token/token");
+const { loginSchema, registerSchema } = require("../validate/auth");
 
 const userCtrl = {
   register: async (req, res) => {
     try {
       const { userName, email, password } = req.body;
+
+      const value = await registerSchema.validate({
+        userName: userName,
+        email: email,
+        password: password,
+      });
+
+      if (value.error) return res.json({ error: value.error.message });
+
+      const userExist = await userSchema.findOne({ email: email });
+
+      if (userExist) return res.json({ error: "User already exists" });
 
       const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -31,7 +37,7 @@ const userCtrl = {
     try {
       const { email, password } = req.body;
       const value = await loginSchema.validate({ email: email });
-      if (value.error) return res.json({ error: value.error.message  });
+      if (value.error) return res.json({ error: value.error.message });
 
       const User = await userSchema.findOne({ email: email });
 
@@ -41,9 +47,15 @@ const userCtrl = {
 
       if (!validDatePassword) return res.json({ error: "Password incorrect" });
 
-      res.json({ user: User });
+      const credentials = {
+        _id: User._id,
+        email: User.email,
+      };
+
+      const token = await generateToken(credentials);
+      res.json({ token: token });
     } catch (error) {
-      res.json({ error: error.message  });
+      res.json({ error: error.message });
     }
   },
 };
