@@ -18,3 +18,4 @@ const loginAction = (credentials) => async (dispatch) => {
     dispatch({ type: LOGIN_ERROR, error: error.message });
   }
 };
+export default loginAction
