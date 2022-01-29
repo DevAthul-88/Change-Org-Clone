@@ -6,21 +6,17 @@ import { useDispatch, useSelector } from "react-redux";
 import loginAction from "../Redux/Login/action";
 
 function Login() {
-
-
-  const state = useSelector(state => state.login)
-  const dispatch = useDispatch()
+  const state = useSelector((state) => state.login);
+  const dispatch = useDispatch();
 
   console.log(state);
   return (
     <div className="container mt-5">
-      {
-        state.error && (
-          <div className="alert alert-danger" role="alert">
- {state.error}
-</div>
-        )
-      }
+      {state.error && (
+        <div className="alert alert-danger" role="alert">
+          {state.error}
+        </div>
+      )}
       <div className="row ">
         <div className=" col-md-6 offset-md-3">
           <h1 className="mb-4 rubik">Login</h1>
@@ -30,8 +26,7 @@ function Login() {
               initialValues={{ email: "", password: "" }}
               validationSchema={LoginSchema}
               onSubmit={(values, { setSubmitting }) => {
-                dispatch(loginAction(values))
-                
+                dispatch(loginAction(values));
               }}
             >
               {({
@@ -85,9 +80,7 @@ function Login() {
                     className="btn btn-danger btn_red"
                     disabled={state.error ? false : isSubmitting}
                   >
-                    <strong>
-                      {state.loading ? 'Loading...' : 'Login'}
-                    </strong>
+                    <strong>{state.loading ? "Loading..." : "Login"}</strong>
                   </button>
                 </form>
               )}

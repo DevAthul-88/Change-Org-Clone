@@ -1,5 +1,6 @@
+require('dotenv').config()
 const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken")
+const jwt = require("jsonwebtoken");
 const userSchema = require("../model/userModel");
 const generateToken = require("../token/token");
 const { loginSchema, registerSchema } = require("../validate/auth");
@@ -60,25 +61,30 @@ const userCtrl = {
     }
   },
 
-  verify: async (req , res) => {
+  verify: async (req, res) => {
     try {
-      
-      const {token} = req.body
+      const  token  = req.header("Authorization");
+console.log(token);
+      if(!token) return res.json({status:false})
 
-      const verified = await jwt.verify(token , process.env.TOken , (err ,  data) => {
-        if(err) return 'Unable to verify token.'
- 
-        return data
-        
-      })
-      console.log(verified);
+      const verified = await jwt.verify(
+        token,
+        process.env.TOken, 
+         async(err, data) => {
+          if (err) return {error:"Unable to verify token."};
 
-
-
+          const user = await userSchema.findOne({_id: data._id});
+          
+          if(!user) return res.json({status:false})
+          
+          return user
+        }
+      );
+      res.json({user:verified , status:true})
     } catch (error) {
-      res.json({error:error.message});
+      res.json({ error: error.message });
     }
-  }
+  },
 };
 
 module.exports = userCtrl;
