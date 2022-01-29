@@ -77,6 +77,7 @@ function Login() {
                   </div>
 
                   <button
+                  type="submit"
                     className="btn btn-danger btn_red"
                     disabled={state.error ? false : isSubmitting}
                   >

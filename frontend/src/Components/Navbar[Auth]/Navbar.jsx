@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import  '../../Css/main.css';
+import {useSelector} from 'react-redux'
 import {Link} from 'wouter'
 
 function Navbar() {
 
+  const user = useSelector(state => state.login)
   const [activeDrop , setActiveDrop] = useState(false)
 
 
@@ -40,10 +42,14 @@ function Navbar() {
       <ul className="navbar-nav ms-auto">
       <li className="nav-item dropdown">
           <a className="nav-link dropdown-toggle" onClick={() => setActiveDrop(!activeDrop)}  id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="true">
-            Kazuma Kyiru
+            {user.userName}
           </a>
           <ul className={`dropdown-menu ${activeDrop ? "d-block" :""}`} aria-labelledby="navbarDropdown" >
-            <li><a className="dropdown-item" href="#">Profile</a></li>   
+            <li>
+              <Link href={`/profile/${user._id}`}>
+              <a className="dropdown-item" >Profile</a>
+              </Link>
+              </li>   
             <li><hr className="dropdown-divider" /></li>
             <li><a className="dropdown-item" href="#">Logout</a></li>
           </ul>
