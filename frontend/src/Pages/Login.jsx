@@ -4,12 +4,20 @@ import { Formik } from "formik";
 import LoginSchema from "../Schema/Login";
 import { useDispatch, useSelector } from "react-redux";
 import loginAction from "../Redux/Login/action";
+import { useEffect } from "react";
 
 function Login() {
+
   const state = useSelector((state) => state.login);
   const dispatch = useDispatch();
 
-  console.log(state);
+
+  useEffect(() => {
+    if (state.status) {
+      window.location.href = "/"
+    }
+  },[state])
+ 
   return (
     <div className="container mt-5">
       {state.error && (
@@ -17,6 +25,7 @@ function Login() {
           {state.error}
         </div>
       )}
+
       <div className="row ">
         <div className=" col-md-6 offset-md-3">
           <h1 className="mb-4 rubik">Login</h1>
@@ -27,6 +36,7 @@ function Login() {
               validationSchema={LoginSchema}
               onSubmit={(values, { setSubmitting }) => {
                 dispatch(loginAction(values));
+               
               }}
             >
               {({
@@ -77,7 +87,7 @@ function Login() {
                   </div>
 
                   <button
-                  type="submit"
+                    type="submit"
                     className="btn btn-danger btn_red"
                     disabled={state.error ? false : isSubmitting}
                   >

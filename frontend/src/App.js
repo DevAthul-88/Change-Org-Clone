@@ -22,7 +22,7 @@ function App() {
           });
 
           setAuth(data.status);
-          if (data.status === false) {
+          if (data.status == false) {
             window.location.href = "/login";
             return localStorage.clear();
           }

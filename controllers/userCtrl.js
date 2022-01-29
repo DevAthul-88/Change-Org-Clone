@@ -55,7 +55,7 @@ const userCtrl = {
       };
 
       const token = await generateToken(credentials);
-      res.json({ token: token });
+      res.json({ token: token , status:true });
     } catch (error) {
       res.json({ error: error.message });
     }

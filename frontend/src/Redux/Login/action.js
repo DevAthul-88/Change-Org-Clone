@@ -11,7 +11,7 @@ const loginAction = (credentials) => async (dispatch) => {
       dispatch({ type: LOGIN_ERROR, payload: data.error });
     }
     if (data.token) {
-      dispatch({ type: LOGIN_SUCCESS });
+      dispatch({ type: LOGIN_SUCCESS , payload: data.status});
       localStorage.setItem("token", data.token);
     }
   } catch (error) {

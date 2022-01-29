@@ -8,7 +8,7 @@ const loginReducer = (state = initialState, action) => {
       return { loading: true };
 
     case LOGIN_SUCCESS:
-      return { loading: false, data: action.payload };
+      return { loading: false, status:action.payload };
 
     case LOGIN_ERROR:
       return { loading: false, error: action.payload };

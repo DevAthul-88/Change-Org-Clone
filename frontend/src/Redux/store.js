@@ -4,7 +4,7 @@ import {composeWithDevTools} from 'redux-devtools-extension'
 import RootReducer from "./rootReducer";
 
 
-const user = localStorage.getItem("user_cred") ? JSON.parse(localStorage.getItem("user_cred")) : null;
+const user = localStorage.getItem("user_cred") ? JSON.parse(localStorage.getItem("user_cred")) : {};
 
 const initialState = {
     login:user
