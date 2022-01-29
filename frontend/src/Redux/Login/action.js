@@ -1,7 +1,7 @@
-import { LOGIN_ERROR, LOGIN_SUCCESS, LOGIN_REQUEST } from "./type";
+import { LOGIN_ERROR, LOGIN_SUCCESS, LOGIN_REQUEST , LOGOUT} from "./type";
 import axios from "axios";
 
-const loginAction = (credentials) => async (dispatch) => {
+export const loginAction = (credentials) => async (dispatch) => {
   try {
     dispatch({ type: LOGIN_REQUEST });
 
@@ -19,4 +19,8 @@ const loginAction = (credentials) => async (dispatch) => {
     dispatch({ type: LOGIN_ERROR, payload: error.message });
   }
 };
-export default loginAction
+
+export const logOutAction = () => async (dispatch) => {
+  localStorage.clear();
+  dispatch({type:LOGOUT})
+}

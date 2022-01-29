@@ -3,7 +3,7 @@ import { Link } from "wouter";
 import { Formik } from "formik";
 import LoginSchema from "../Schema/Login";
 import { useDispatch, useSelector } from "react-redux";
-import loginAction from "../Redux/Login/action";
+import {loginAction} from "../Redux/Login/action";
 import { useEffect } from "react";
 
 function Login() {

@@ -1,13 +1,20 @@
 import React, { useState } from 'react';
 import  '../../Css/main.css';
-import {useSelector} from 'react-redux'
+import {logOutAction} from '../../Redux/Login/action'
+import {useSelector , useDispatch} from 'react-redux'
 import {Link} from 'wouter'
 
 function Navbar() {
 
+  const dispatch = useDispatch()
   const user = useSelector(state => state.login)
   const [activeDrop , setActiveDrop] = useState(false)
+ 
 
+  function LogOut(){
+    dispatch(logOutAction())
+    window.location.href = "/login"
+  }
 
   return <nav className="navbar navbar-expand-lg navbar-light bg-light">
   <div className="container">
@@ -46,12 +53,12 @@ function Navbar() {
           </a>
           <ul className={`dropdown-menu ${activeDrop ? "d-block" :""}`} aria-labelledby="navbarDropdown" >
             <li>
-              <Link href={`/profile/${user._id}`}>
+              <Link href={`/profile/${user.userInfo._id}`}>
               <a className="dropdown-item" >Profile</a>
               </Link>
               </li>   
             <li><hr className="dropdown-divider" /></li>
-            <li><a className="dropdown-item" href="#">Logout</a></li>
+            <li><a className="dropdown-item" onClick={LogOut} style={{cursor:"pointer"}}>Logout</a></li>
           </ul>
         </li>
         </ul>

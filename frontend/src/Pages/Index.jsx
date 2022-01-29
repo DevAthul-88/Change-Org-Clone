@@ -10,7 +10,7 @@ function Index() {
           <IndexHeader />
       </div>
       <div className="row">
-            <div className="col-9">
+            <div className="col-md-9">
               <Post />
             </div>
             <div className="col">

@@ -36,7 +36,7 @@ function Post() {
 
       {petitions.map((e, index) => {
         return (
-          <div className="card mt-4">
+          <div className="card mt-4" key={index}>
             <div className="card-body">
               <div className="card-title">
                 <h3 className=" text-capitalize">{e.title}</h3>

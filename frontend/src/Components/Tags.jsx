@@ -12,7 +12,7 @@ function Tags() {
         {
           data.map((e , index) => {
             return(
-              <Link href={`/category/${e.key}`}>
+              <Link href={`/category/${e.key}`} key={index}>
               <a  className="btn btn-outline-dark">{e.name}</a>
               </Link>
             )
