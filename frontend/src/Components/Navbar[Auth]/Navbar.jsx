@@ -42,7 +42,7 @@ function Navbar() {
       <ul className="navbar-nav ms-auto">
       <li className="nav-item dropdown">
           <a className="nav-link dropdown-toggle" onClick={() => setActiveDrop(!activeDrop)}  id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="true">
-            {user.userName}
+            {user.userInfo.userName}
           </a>
           <ul className={`dropdown-menu ${activeDrop ? "d-block" :""}`} aria-labelledby="navbarDropdown" >
             <li>
