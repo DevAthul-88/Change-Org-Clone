@@ -13,6 +13,7 @@ const loginAction = (credentials) => async (dispatch) => {
     if (data.token) {
       dispatch({ type: LOGIN_SUCCESS , payload: data.status});
       localStorage.setItem("token", data.token);
+      localStorage.setItem("user_cred" , JSON.stringify(data.user))
     }
   } catch (error) {
     dispatch({ type: LOGIN_ERROR, payload: error.message });

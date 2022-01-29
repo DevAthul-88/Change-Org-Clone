@@ -15,20 +15,12 @@ function App() {
         const token = localStorage.getItem("token");
 
         if (token) {
-          const { data } = await axios.post("/api/user/verify", {
-            headers: {
-              Authorization: token,
-            },
-          });
-
-          setAuth(data.status);
-          if (!data.status) {
-            window.location.href = "/login";
-            return localStorage.clear();
+          setAuth(true);
+          const user = localStorage.getItem("user_cred");
+          if(!user){
+            window.location.href = "/login"
+            return localStorage.clear()
           }
-
-          localStorage.setItem("user_cred", JSON.stringify(data.user));
-          if (!data.user) return localStorage.clear();
         }
       } catch (error) {
         console.log(error.message);

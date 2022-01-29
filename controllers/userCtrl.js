@@ -55,37 +55,21 @@ const userCtrl = {
       };
 
       const token = await generateToken(credentials);
-      res.json({ token: token , status:true });
+      const user = await userSchema.findOne({_id:credentials._id});
+      if(!user) return res.json({status:false})
+      const userData = {
+         _id: user._id,
+         userName:user.userName,
+         email: user.email,
+         createdAt:user.createdAt
+      }
+      res.json({ token: token , status:true , user:userData });
     } catch (error) {
       res.json({ error: error.message });
     }
   },
 
-  verify: async (req, res) => {
-   
-    try {
-      const token = req.body.headers["Authorization"];
-     
-      if (!token) return res.json({ status: false });
-
-      const verified = await jwt.verify(
-        token,
-        process.env.TOken,
-        async (err, data) => {
-          if (err) return { error: "Unable to verify token." };
-
-          const user = await userSchema.findOne({ _id: data._id });
-
-          if (!user) return res.json({ status: false });
-           
-          return user;
-        }
-      );
-      res.json({ user: verified, status: true });
-    } catch (error) {
-      res.json({ error: error.message });
-    }
-  },
+  
 };
 
 module.exports = userCtrl;
