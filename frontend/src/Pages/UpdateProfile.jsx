@@ -1,22 +1,39 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Formik } from "formik";
 import EditSchema from "../Schema/Edit";
+import EditProfileAction from "../Redux/EditProfile/action";
 
-function UpdateProfile({ id }) {
+function UpdateProfile() {
   const { userInfo } = useSelector((state) => state.login);
+  const { loading, status, error } = useSelector((state) => state.editProfile);
+  const dispatch = useDispatch();
   return (
     <div className="container mt-5">
+      {status && (
+        <div className="alert alert-success" role="alert">
+          {status}
+        </div>
+      )}
+      {error && (
+        <div className="alert alert-danger" role="alert">
+          {error}
+        </div>
+      )}
       <div className="row ">
         <div className=" col-md-6 offset-md-3">
           <h1 className="mb-4 rubik">Edit Profile</h1>
 
           <div className="form">
             <Formik
-              initialValues={{ email: userInfo.email , userName: userInfo.userName }}
+              initialValues={{
+                email: userInfo.email,
+                userName: userInfo.userName,
+                id: userInfo._id,
+              }}
               validationSchema={EditSchema}
               onSubmit={(values, { setSubmitting }) => {
-                console.log(values);
+                dispatch(EditProfileAction(values));
               }}
             >
               {({
@@ -39,7 +56,7 @@ function UpdateProfile({ id }) {
                       onChange={handleChange}
                       aria-describedby="emailHelp"
                     />
-                     <div className="form-label text-danger">
+                    <div className="form-label text-danger">
                       {errors.userName && touched.userName && errors.userName}
                     </div>
                   </div>
@@ -53,13 +70,13 @@ function UpdateProfile({ id }) {
                       defaultValue={userInfo.email}
                       aria-describedby="emailHelp"
                     />
-                     <div className="form-label text-danger">
+                    <div className="form-label text-danger">
                       {errors.email && touched.email && errors.email}
                     </div>
                   </div>
 
                   <button className="btn btn-danger btn_red" type="submit">
-                    <strong>Save Changes</strong>
+                    <strong>{loading ? "Loading...." : "Save changes"}</strong>
                   </button>
                 </form>
               )}

@@ -55,21 +55,51 @@ const userCtrl = {
       };
 
       const token = await generateToken(credentials);
-      const user = await userSchema.findOne({_id:credentials._id});
-      if(!user) return res.json({status:false})
+      const user = await userSchema.findOne({ _id: credentials._id });
+      if (!user) return res.json({ status: false });
       const userData = {
-         _id: user._id,
-         userName:user.userName,
-         email: user.email,
-         createdAt:user.createdAt
-      }
-      res.json({ token: token , status:true , user:userData });
+        _id: user._id,
+        userName: user.userName,
+        email: user.email,
+        createdAt: user.createdAt,
+      };
+      res.json({ token: token, status: true, user: userData });
     } catch (error) {
       res.json({ error: error.message });
     }
   },
 
-  
+  edit: async (req, res) => {
+    try {
+      const { id, email, userName } = req.body;
+
+      const user = {
+        email: email,
+        userName: userName,
+      };
+      const data = await userSchema.findOneAndUpdate({ _id: id }, user);
+
+        
+      
+        if(!data){
+          res.json({
+            message: "Can't update your profile, please try again later.",
+          });
+        }
+      
+
+      const userData = {
+        _id: data._id,
+        userName: data.userName,
+        email: data.email,
+        createdAt:data.createdAt,
+      };
+
+      res.json({ userInfo: userData });
+    } catch (error) {
+      res.send({ error: error.message });
+    }
+  },
 };
 
 module.exports = userCtrl;
