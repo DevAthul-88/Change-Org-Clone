@@ -8,11 +8,12 @@ function UpdateProfile() {
   const { userInfo } = useSelector((state) => state.login);
   const { loading, status, error } = useSelector((state) => state.editProfile);
   const dispatch = useDispatch();
+  console.log(status);
   return (
     <div className="container mt-5">
       {status && (
         <div className="alert alert-success" role="alert">
-          {status}
+          You'r profile updated successfully
         </div>
       )}
       {error && (
