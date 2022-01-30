@@ -2,11 +2,13 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const userRoute = require("./routes/userRoute");
+const petitionRoute = require("./routes/petitionRoute");
 const mongoose = require("mongoose");
 
 app.use(express.json());
 
 app.use("/api/user", userRoute);
+app.use("/api/petition", petitionRoute);
 
 const port = process.env.PORT || 3001;
 

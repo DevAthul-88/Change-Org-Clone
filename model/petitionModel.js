@@ -10,8 +10,8 @@ const petitionSchema = new mongoose.Schema({
     required: true,
   },
   expectedVote: {
-    type: Number,
-    default: 0,
+    type:Array,
+    default: [],
     required: true,
   },
   category:{
@@ -19,14 +19,18 @@ const petitionSchema = new mongoose.Schema({
       required: true,
   },
   currentVote: {
-    type: Number,
-    default: 0,
+    type:Array,
+    default: [],
     required: true,
   },
-  supported:{
+  supporters:{
       type:Array,
       default: [],
       required: true,
+  },
+  user:{
+    type:mongoose.Types.ObjectId,
+    required: true,
   }
 });
 
