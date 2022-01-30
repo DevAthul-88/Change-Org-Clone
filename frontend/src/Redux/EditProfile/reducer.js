@@ -9,9 +9,9 @@ const initialState = {};
 const editProfileReducer = (state = initialState, action) => {
   switch (action.type) {
     case EDIT_PROFILE_REQUEST:
-      return { loading: true };
+      return { loading: true};
     case EDIT_PROFILE_SUCCESS:
-      return { loading: false, userInfo: action.payload, status:true };
+      return { loading: false, status:true , userInfo: action.payload };
     case EDIT_PROFILE_ERROR:
       return { loading: false, error: action.payload };
     default:
