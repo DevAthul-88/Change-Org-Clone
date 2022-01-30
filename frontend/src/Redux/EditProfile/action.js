@@ -11,11 +11,19 @@ const editProfileAction = (credentials) => async (dispatch, getState) => {
   try {
     dispatch({ type: EDIT_PROFILE_REQUEST });
 
+    const token = localStorage.getItem("token")
+  
     const {
       login: { userInfo },
     } = getState();
 
-    const { data } = await axios.post("/api/user/edit", credentials);
+    const config = {
+      headers: {
+        authorization:`Bearer ${token}`
+      } 
+    }
+
+    const { data } = await axios.post("/api/user/edit", credentials  , config);
     if (data.message) {
       dispatch({ type: EDIT_PROFILE_ERROR, payload: data.message });
     }

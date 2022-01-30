@@ -6,24 +6,21 @@ import EditProfileAction from "../Redux/EditProfile/action";
 
 function UpdateProfile() {
   const { userInfo } = useSelector((state) => state.login);
-  const {loading , status} = useSelector((state) => state.editProfile);
+  const { loading, status, error } = useSelector((state) => state.editProfile);
 
-console.log(status);
   const dispatch = useDispatch();
   return (
     <div className="container mt-5">
-      {status?  (
+      {status ? (
         <div className="alert alert-success" role="alert">
           Profile updated successfully
         </div>
       ) : null}
-      {/* {state.state.error !== undefined ? (
-        (
-          <div className="alert alert-danger" role="alert">
-            {state.state.error}
-          </div>
-        )
-      ) : null} */}
+      {error ? (
+        <div className="alert alert-danger" role="alert">
+          {error}
+        </div>
+      ) : null}
       <div className="row ">
         <div className=" col-md-6 offset-md-3">
           <h1 className="mb-4 rubik">Edit Profile</h1>

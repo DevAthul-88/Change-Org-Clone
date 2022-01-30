@@ -34,7 +34,7 @@ function Navbar() {
          </Link>
         </li>
         <li className="nav-item">
-          <Link href={`/profile/${user.userInfo._id}`}>
+          <Link href={`/profile`}>
           <a className="nav-link" >My petitions</a>
           </Link>
         </li>
