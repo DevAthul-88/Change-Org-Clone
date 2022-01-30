@@ -77,22 +77,21 @@ const userCtrl = {
         email: email,
         userName: userName,
       };
-      const data = await userSchema.findOneAndUpdate({ _id: id }, user);
+      await userSchema.updateOne({ _id: id }, user);
 
-        
-      
-        if(!data){
-          res.json({
-            message: "Can't update your profile, please try again later.",
-          });
-        }
-      
+      const data = await userSchema.findOne({ _id: id });
+
+      if (!data) {
+        res.json({
+          message: "Can't update your profile, please try again later.",
+        });
+      }
 
       const userData = {
         _id: data._id,
         userName: data.userName,
         email: data.email,
-        createdAt:data.createdAt,
+        createdAt: data.createdAt,
       };
 
       res.json({ userInfo: userData });
