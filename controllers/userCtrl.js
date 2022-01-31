@@ -1,5 +1,6 @@
 require("dotenv").config();
 const bcrypt = require("bcrypt");
+const res = require("express/lib/response");
 const jwt = require("jsonwebtoken");
 const userSchema = require("../model/userModel");
 const generateToken = require("../token/token");
@@ -99,6 +100,23 @@ const userCtrl = {
       res.send({ error: error.message });
     }
   },
+
+  getUserById: async (req , res) => {
+    try {
+     const data = await userSchema.findOne({_id: req.params.id})
+     if(!data) return res.json({message:"No user found."})
+     
+     const user = {
+       userName:data.userName,
+       email:data.email,
+       _id:data._id,
+       createdAt:data.createdAt
+     }
+     res.json(user)
+    } catch (error) {
+      res.json({error: error.message})
+    }
+  }
 };
 
 module.exports = userCtrl;

@@ -1,4 +1,4 @@
-import editProfileReducer from "../EditProfile/reducer";
+
 import {
   USER_PROFILE_LOADING,
   USER_PROFILE_SUCCESS,

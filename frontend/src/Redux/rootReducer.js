@@ -10,5 +10,5 @@ export default combineReducers({
   editProfile: editProfileReducer,
   create: petitionCreateReducer,
   post: postReducer,
-  profileReducer: profileReducer
+  profile: profileReducer
 });

@@ -13,7 +13,7 @@ function Post({ petitions }) {
             <div className="card-body">
               <div className="card-title">
                 <h3 className=" text-capitalize ">
-                  <Link href={`/petition/${e._id}`} className="text-dark text-decoration-none post_link">
+                  <Link href={`/petition/${e._id}`} className="text-dark text-decoration-none post_link rubik">
                   {e.title}
                   </Link>
                 </h3>
