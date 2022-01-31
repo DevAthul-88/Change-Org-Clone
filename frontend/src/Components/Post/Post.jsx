@@ -1,35 +1,7 @@
 import React from "react";
 
-function Post() {
-  const petitions = [
-    {
-      title: "title",
-      description:
-        "Excepteur adipisicing id consequat exercitation non. Exercitation sit sint enim nisi sint non qui reprehenderit. Ullamco commodo eu duis ex aliquip est ullamco. Cillum consequat pariatur nostrud sint commodo. Mollit velit aliquip dolor laboris aliqua nulla id fugiat fugiat do proident culpa. Officia deserunt et est ut adipisicing magna tempor veniam irure. Laborum reprehenderit tempor nulla ex mollit ipsum sunt in.",
-    },
-    {
-      title: "title",
-      description: "description",
-    },
-
-    {
-      title: "title",
-      description: "description",
-    },
-    {
-      title: "title",
-      description: "description",
-    },
-    {
-      title: "title",
-      description: "description",
-    },
-    {
-      title: "title",
-      description: "description",
-    },
-  ];
-
+function Post({petitions}) {
+  
   return (
     <div>
       <h1>Petitions</h1>

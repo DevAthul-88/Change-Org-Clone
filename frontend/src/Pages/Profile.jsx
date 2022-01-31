@@ -14,10 +14,10 @@ function Profile({ id }) {
 
   const Main = () => {
     if (route == "started") {
-      return <Signed />;
+      return <Started />;
     } 
     else {
-      return <Started />;
+      return <Signed />;
     }
   };
 
