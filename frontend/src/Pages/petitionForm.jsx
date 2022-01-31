@@ -1,10 +1,24 @@
 import React from "react";
 import { Formik } from "formik";
+import {useDispatch , useSelector} from 'react-redux'
 import CreateSchema from "../Schema/Create";
+import petitionCreateAction from '../Redux/Petition/actions'
 
-function petitionForm({ id }) {
+function PetitionForm({ id }) {
+  const dispatch = useDispatch();
+  const {loading , error , status} = useSelector((state) => state.create)
   return (
     <div className="container mt-5">
+        {status ? (
+        <div className="alert alert-success" role="alert">
+          Petition created successfully!
+        </div>
+      ) : null}
+        {error ? (
+        <div className="alert alert-danger" role="alert">
+          {error}
+        </div>
+      ) : null}
       <div className="row ">
         <div className=" col-md-6 offset-md-3">
           <h1 className="mb-4 rubik">Create a new petition</h1>
@@ -20,7 +34,7 @@ function petitionForm({ id }) {
               }}
               validationSchema={CreateSchema}
               onSubmit={(values, { setSubmitting }) => {
-                console.log(values);
+                dispatch(petitionCreateAction(values))
               }}
             >
               {({
@@ -107,7 +121,7 @@ function petitionForm({ id }) {
                   </div>
 
                   <button className="btn btn-danger btn_red" type="submit">
-                    <strong>Create petition</strong>
+                    <strong>{loading ? 'Loading...' : 'Create petition'}</strong>
                   </button>
                 </form>
               )}
@@ -119,4 +133,4 @@ function petitionForm({ id }) {
   );
 }
 
-export default petitionForm;
+export default PetitionForm;

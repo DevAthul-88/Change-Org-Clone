@@ -18,3 +18,4 @@ const petitionCreateAction = (state = initialState, action) => {
       return state;
   }
 };
+export default petitionCreateAction
