@@ -9,21 +9,16 @@ const petitionCreateReducer = (credentials) => async (dispatch, getState) => {
   try {
     dispatch({ type: PETITION_CREATE_REQUEST });
 
-    const {
-      login: { userInfo },
-    } = getState();
+    const token = localStorage.getItem("token");
 
     const config = {
       headers: {
-        authorization: `Bearer ${userInfo.token}`,
+        authorization: `Bearer ${token}`,
       },
     };
 
-    const { data } = await axios.post(
-      "/api/petition/create",
-      credentials,
-      config
-    );
+    const { data } = await axios.post("/api/petition/create",credentials,config);
+    if(data.error) return dispatch({type:PETITION_CREATE_ERROR , payload: data.error})
     if (data.status) {
       dispatch({ type: PETITION_CREATE_SUCCESS, payload: data.status });
     }

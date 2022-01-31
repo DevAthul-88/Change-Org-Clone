@@ -2,7 +2,7 @@ import React from "react";
 import { Formik } from "formik";
 import {useDispatch , useSelector} from 'react-redux'
 import CreateSchema from "../Schema/Create";
-import petitionCreateAction from '../Redux/Petition/reducer'
+import petitionCreateAction from '../Redux/Petition/action'
 
 function PetitionForm({ id }) {
   const dispatch = useDispatch();
@@ -28,7 +28,7 @@ function PetitionForm({ id }) {
               initialValues={{
                 title: "",
                 description: "",
-                goal: 1,
+                goal: 2,
                 message: "",
                 category: id,
               }}

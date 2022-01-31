@@ -10,18 +10,17 @@ const petitionSchema = new mongoose.Schema({
     required: true,
   },
   expectedVote: {
-    type:Array,
-    default: [],
+    type:Number,
     required: true,
   },
   category:{
       type: String,
       required: true,
   },
-  currentVote: {
-    type:Array,
-    default: [],
-    required: true,
+  completed:{
+    type: Boolean,
+    default: false,
+    required: false
   },
   supporters:{
       type:Array,
@@ -32,7 +31,7 @@ const petitionSchema = new mongoose.Schema({
     type:mongoose.Types.ObjectId,
     required: true,
   }
-});
+},{timestamps:true});
 
 const petition = mongoose.model("Petition", petitionSchema);
 
