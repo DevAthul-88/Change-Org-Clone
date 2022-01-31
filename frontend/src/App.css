@@ -56,3 +56,6 @@
     font-family:var(--rubik);
     font-weight:bold;
 }
+.post_link:hover{
+    color: var(--red) !important;
+}

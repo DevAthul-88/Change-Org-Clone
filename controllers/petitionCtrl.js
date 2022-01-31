@@ -13,7 +13,10 @@ module.exports = {
                 expectedVote:req.body.goal,
                 category:req.body.category,
                 supporters:{user:id , message:message},
-                user:req.user._id
+                user:{
+                    userName:req.user.userName,
+                    id:id,
+                }
             })
             await petition.save()
             res.json({status:true})
@@ -25,7 +28,7 @@ module.exports = {
     getPetitionByUser: async (req , res) => {
        try {
            const user = req.user._id
-           const petition = await petitionSchema.find({user:user})
+           const petition = await petitionSchema.find({'user.id':user})
            if(!petition) return res.json({message:"Nothing found"})
            
            res.json({data:petition})

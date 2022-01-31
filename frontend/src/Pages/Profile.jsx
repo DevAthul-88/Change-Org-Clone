@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import Signed from '../Components/Petitions/Signed'
 import Started from "../Components/Petitions/Started";
 
-function Profile({ id }) {
+function Profile() {
   const state = useSelector((state) => state.login);
   const [route, setRoute] = useState("started");
 
@@ -24,8 +24,9 @@ function Profile({ id }) {
   return (
     <div className="container">
       <div className="mt-5">
-        <div className="text-center">
-          <h1 className="text-capitalize display-2 fw-bold rubik">
+        <div >
+         <div className="text-center">
+         <h1 className="text-capitalize display-2 fw-bold rubik">
             {state.userInfo.userName}
           </h1>
           <Link href={`/profile/edit`}>
@@ -33,6 +34,7 @@ function Profile({ id }) {
               <strong>Edit Profile</strong>
             </a>
           </Link>
+         </div>
 
           <div style={{ background: "#fff", borderBottom: "1px solid #c7c7c7" }}>
         <div className="container mt-5">

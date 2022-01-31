@@ -28,7 +28,8 @@ const petitionSchema = new mongoose.Schema({
       required: true,
   },
   user:{
-    type:mongoose.Types.ObjectId,
+    type:Object,
+    default:{},
     required: true,
   }
 },{timestamps:true});
