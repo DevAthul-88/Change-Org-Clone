@@ -20,5 +20,16 @@ module.exports = {
          } catch (error) {
              res.json({error: error.message})
          }
+    },
+
+    getPetitionByUser: async (req , res) => {
+       try {
+           const user = req.user._id
+           const petition = await petitionSchema.findById(user)
+           if(!petition) return res.json({message:"Nothing found"})
+           res.json({data:petition})
+       } catch (error) {
+           res.json({error: error.message})
+       }
     }
 }

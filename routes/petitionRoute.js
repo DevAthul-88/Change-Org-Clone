@@ -3,5 +3,5 @@ const petitionCtrl = require('../controllers/petitionCtrl');
 const authMiddleware = require('../middleware/auth');
 
 Router.route("/create").post(authMiddleware , petitionCtrl.create)
-
+Router.route("/getByUser").get(authMiddleware , petitionCtrl.getPetitionByUser)
 module.exports = Router
