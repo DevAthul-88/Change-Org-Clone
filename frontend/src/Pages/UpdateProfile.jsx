@@ -51,7 +51,9 @@ function UpdateProfile() {
                     <label className="form-label">Username</label>
                     <input
                       type="text"
-                      className="form-control"
+                      className={`form-control ${
+                        errors.userName ? "border-danger" : null
+                      }`}
                       name="userName"
                       defaultValue={userInfo.userName}
                       onChange={handleChange}
@@ -67,7 +69,9 @@ function UpdateProfile() {
                     <input
                       type="email"
                       name="email"
-                      className="form-control"
+                      className={`form-control ${
+                        errors.email ? "border-danger" : null
+                      }`}
                       defaultValue={userInfo.email}
                       aria-describedby="emailHelp"
                     />

@@ -1,5 +1,6 @@
 import React from "react";
-
+import { Formik } from "formik";
+import CreateSchema from "../Schema/Create";
 
 function petitionForm({ id }) {
   return (
@@ -9,40 +10,108 @@ function petitionForm({ id }) {
           <h1 className="mb-4 rubik">Create a new petition</h1>
 
           <div className="form">
-            <form>
-              <div className="mb-3">
-                <label className="form-label">Title</label>
-                <input
-                  type="text"
-                  className="form-control"
-                />
-              </div>
+            <Formik
+              initialValues={{
+                title: "",
+                description: "",
+                goal: 1,
+                message: "",
+                category: id,
+              }}
+              validationSchema={CreateSchema}
+              onSubmit={(values, { setSubmitting }) => {
+                console.log(values);
+              }}
+            >
+              {({
+                values,
+                errors,
+                touched,
+                handleChange,
+                handleBlur,
+                handleSubmit,
+                isSubmitting,
+              }) => (
+                <form onSubmit={handleSubmit}>
+                  <div className="mb-3">
+                    <label className="form-label">Title</label>
+                    <input
+                      type="text"
+                      className={`form-control ${
+                        errors.title ? "border-danger" : null
+                      }`}
+                      name="title"
+                      value={values.title}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                    />
+                    <div className="form-label text-danger">
+                      {errors.title && touched.title && errors.title}
+                    </div>
+                  </div>
 
-              <div className="mb-3">
-                <label className="form-label">Description</label>
-                 <textarea className="form-control" name="description" rows={10}></textarea>
-              </div>
+                  <div className="mb-3">
+                    <label className="form-label">Description</label>
+                    <textarea
+                      className={`form-control ${
+                        errors.description ? "border-danger" : null
+                      }`}
+                      name="description"
+                      value={values.description}
+                      rows={10}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                    ></textarea>
+                    <div className="form-label text-danger">
+                      {errors.description &&
+                        touched.description &&
+                        errors.description}
+                    </div>
+                  </div>
 
-              <div className="mb-3">
-                <label className="form-label">Signature goal</label>
-                <input
-                  type="number"
-                  className="form-control"
-                  id="exampleInputEmail1"
-                  aria-describedby="emailHelp"
-                />
-              </div>
+                  <div className="mb-3">
+                    <label className="form-label">Signature goal</label>
+                    <input
+                      type="number"
+                     
+                      className={`form-control ${
+                        errors.goal ? "border-danger" : null
+                      }`}
+                      id="exampleInputEmail1"
+                      name="goal"
+                      aria-describedby="emailHelp"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.goal}
+                    />
+                    <div className="form-label text-danger">
+                      {errors.goal && touched.goal && errors.goal}
+                    </div>
+                  </div>
 
-              <div className="mb-3">
-                <h4>Your signature</h4>
-                <label className="form-label mt-3">Your message</label>
-                <textarea className="form-control" name="message"></textarea>
-              </div>
+                  <div className="mb-3">
+                    <h4>Your signature</h4>
+                    <label className="form-label mt-3">Your message</label>
+                    <textarea
+                      className={`form-control ${
+                       errors.message ? "border-danger" : null
+                      }`}
+                      name="message"
+                      value={values.message}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                    ></textarea>
+                    <div className="form-label text-danger">
+                      {errors.message && touched.message && errors.message}
+                    </div>
+                  </div>
 
-              <button className="btn btn-danger btn_red">
-                <strong>Create petition</strong>
-              </button>
-            </form>
+                  <button className="btn btn-danger btn_red" type="submit">
+                    <strong>Create petition</strong>
+                  </button>
+                </form>
+              )}
+            </Formik>
           </div>
         </div>
       </div>
