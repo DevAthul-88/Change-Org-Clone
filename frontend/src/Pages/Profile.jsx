@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import Signed from '../Components/Petitions/Signed'
 import Started from "../Components/Petitions/Started";
 
-function Profile() {
+function Profile({id}) {
   const state = useSelector((state) => state.login);
   const [route, setRoute] = useState("started");
 
