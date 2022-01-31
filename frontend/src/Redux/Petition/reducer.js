@@ -3,33 +3,19 @@ import {
   PETITION_CREATE_SUCCESS,
   PETITION_CREATE_ERROR,
 } from "./types";
-import axios from "axios";
 
-const petitionCreateReducer = (credentials) => async (dispatch, getState) => {
-  try {
-    dispatch({ type: PETITION_CREATE_SUCCESS });
+const initialState = {};
 
-    const {
-      login: { userInfo },
-    } = getState();
-
-    const config = {
-      headers: {
-        authorization: `Bearer ${userInfo.token}`,
-      },
-    };
-
-    const { data } = await axios.post(
-      "/api/petition/create",
-      credentials,
-      config
-    );
-    if (data.status) {
-      dispatch({ type: PETITION_CREATE_SUCCESS, payload: data.status });
-    }
-  } catch (error) {
-    dispatch({ type: PETITION_CREATE_ERROR, payload: error.message });
+const petitionCreateAction = (state = initialState, action) => {
+  switch (action.type) {
+    case PETITION_CREATE_REQUEST:
+      return { loading: true };
+    case PETITION_CREATE_SUCCESS:
+      return { loading: false, status: action.payload };
+    case PETITION_CREATE_ERROR:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
   }
 };
-
-export default petitionCreateReducer;
+export default petitionCreateAction

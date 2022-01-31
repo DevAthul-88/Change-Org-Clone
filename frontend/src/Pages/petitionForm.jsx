@@ -2,7 +2,7 @@ import React from "react";
 import { Formik } from "formik";
 import {useDispatch , useSelector} from 'react-redux'
 import CreateSchema from "../Schema/Create";
-import petitionCreateAction from '../Redux/Petition/actions'
+import petitionCreateAction from '../Redux/Petition/reducer'
 
 function PetitionForm({ id }) {
   const dispatch = useDispatch();
