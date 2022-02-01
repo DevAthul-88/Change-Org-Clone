@@ -1,5 +1,6 @@
 import {
   PETITION_ALL,
+  PETITION_ID,
   PETITION_POPULAR,
   PETITION_SIGNED,
   PETITION_RECENT,
@@ -31,3 +32,12 @@ export const petitionByDate = () => async (dispatch) => {
     dispatch({ type: PETITION_ERROR, payload: error.message });
   }
 };
+export const petitionById = (id) => async (dispatch) => {
+  try {
+    dispatch({type:PETITION_REQUESTED})
+    const {data} = await axios.get(`/api/petition/${id}`)
+    dispatch({type:PETITION_ID , payload: data})
+  } catch (error) {
+    dispatch({ type: PETITION_ERROR, payload: error.message });
+  }
+}

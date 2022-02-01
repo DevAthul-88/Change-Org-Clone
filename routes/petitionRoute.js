@@ -5,4 +5,5 @@ const authMiddleware = require('../middleware/auth');
 Router.route("/create").post(authMiddleware , petitionCtrl.create)
 Router.route("/getByUser").get(authMiddleware , petitionCtrl.getPetitionByUser)
 Router.route("/getByDate").get(petitionCtrl.getPetitionByDate)
+Router.route("/:id").get(petitionCtrl.getPetitionById)
 module.exports = Router

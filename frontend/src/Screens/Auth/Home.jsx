@@ -8,6 +8,7 @@ import Category from "../../Pages/Category";
 import Browse from "../../Pages/Browse";
 import Profile from "../../Pages/Profile";
 import UpdateProfile from "../../Pages/UpdateProfile";
+import PetitionPage from "../../Pages/petitionPage";
 
 function Home() {
   return (
@@ -26,6 +27,9 @@ function Home() {
         {(params) => <Profile id={params.id} />}
       </Route>
       <Route path="/me/edit" component={UpdateProfile} />
+      <Route path="/petition/:id">
+        {(params) => <PetitionPage id={params.id}/>}
+      </Route>
     </div>
   );
 }

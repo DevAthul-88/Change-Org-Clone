@@ -38,11 +38,21 @@ module.exports = {
     },
     getPetitionByDate: async (req , res) => {
     try {
-        const petition = await petitionSchema.findById().sort({createdAt:-1}).limit(20)
+        const petition = await petitionSchema.find().sort({createdAt:-1}).limit(20)
         if(!petition) return res.json({message: "Nothing found"})
         res.json({data: petition})
     } catch (error) {
         res.json({error: error.message})
     }
+    },
+
+    getPetitionById: async (req , res) => {
+        try {
+            const {id} = req.params
+            const data = await petitionSchema.findById({_id: id});
+            res.json(data)
+        } catch (error) {
+            res.json({error: error.message})
+        }
     }
 }
