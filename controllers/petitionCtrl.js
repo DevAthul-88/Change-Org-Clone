@@ -39,7 +39,8 @@ module.exports = {
     getPetitionByDate: async (req , res) => {
     try {
         const petition = await petitionSchema.findById().sort({createdAt:-1}).limit(20)
-        res.json(petition)
+        if(!petition) return res.json({message: "Nothing found"})
+        res.json({data: petition})
     } catch (error) {
         res.json({error: error.message})
     }
