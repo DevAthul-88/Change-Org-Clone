@@ -35,5 +35,13 @@ module.exports = {
        } catch (error) {
            res.json({error: error.message})
        }
+    },
+    getPetitionByDate: async (req , res) => {
+    try {
+        const petition = await petitionSchema.findById().sort({createdAt:-1}).limit(20)
+        res.json(petition)
+    } catch (error) {
+        res.json({error: error.message})
+    }
     }
 }

@@ -11,7 +11,7 @@ function Index() {
       </div>
       <div className="row">
             <div className="col-md-9">
-              <Post />
+         
             </div>
             <div className="col">
               <Tags />

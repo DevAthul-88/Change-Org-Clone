@@ -39,7 +39,7 @@ function Profile({ id }) {
                 <h1 className="text-capitalize display-2 fw-bold rubik">
                   {profile.userName}
                 </h1>
-                <Link href={`/profile/edit`}>
+                <Link href={`/me/edit`}>
                   <a className="btn mt-4 btn-outline-dark">
                     <strong>Edit Profile</strong>
                   </a>
