@@ -13,11 +13,11 @@ module.exports = {
                 description:req.body.description,
                 expectedVote:req.body.goal,
                 category:req.body.category,
-                supporters:{user:req.user.userName , id:id , message:message},
+                supporters:{user:req.user.userName , id:id , message:message ,  createdAt:Date.now(),},
                 user:{
                     userName:req.user.userName,
                     id:id,
-                    createdAt:Date.now(),
+                   
                 }
             })
             await petition.save()

@@ -18,7 +18,6 @@ function Home() {
       <Route path="/login" component={Login} />
       <Route path="/signup" component={SignUp} />
       <Route path="/start-a-petition" component={StartPetition} />
-      <Route path="/start-a-petition/:id">{params => <PetitionForm id={params.id} />}</Route>
       <Route path="/category/:id">{params => <Category id={params.id} />}</Route>
       <Route path="/petitions" component={Browse} />
       <Route path="/p/:id">

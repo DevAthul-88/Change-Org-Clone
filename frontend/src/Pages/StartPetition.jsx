@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import categories from "../data/category";
 import { useLocation } from "wouter";
 
@@ -6,12 +7,14 @@ function StartPetition() {
   const [location, setLocation] = useLocation();
   const [key, setKey] = useState("");
 
+  const { userInfo } = useSelector((state) => state.login);
+
   function addKey(id) {
     setKey(id);
   }
 
   function nextFunc() {
-    if (true) {
+    if (Object.keys(userInfo).length !== 0) {
       setLocation(`/start-a-petition/${key}`);
     } else {
       setLocation("/login");

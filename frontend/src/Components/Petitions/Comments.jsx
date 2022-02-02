@@ -12,7 +12,7 @@ function Comments({ loading, data }) {
         them, and share your reason for signing (this will mean a lot to the
         starter of the petition).
       </p>
-
+<hr />
       {loading ? (
         <Loader />
       ) : (

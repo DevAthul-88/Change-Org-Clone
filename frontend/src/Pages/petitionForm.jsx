@@ -4,9 +4,12 @@ import {useDispatch , useSelector} from 'react-redux'
 import CreateSchema from "../Schema/Create";
 import petitionCreateAction from '../Redux/Petition/action'
 
+
 function PetitionForm({ id }) {
   const dispatch = useDispatch();
   const {loading , error , status} = useSelector((state) => state.create)
+  
+
   return (
     <div className="container mt-5">
         {status ? (
@@ -21,7 +24,7 @@ function PetitionForm({ id }) {
       ) : null}
       <div className="row ">
         <div className=" col-md-6 offset-md-3">
-          <h1 className="mb-4 rubik">Create a new petition</h1>
+          <h1 className="mb-4 rubik fs-bold">Create a new petition</h1>
 
           <div className="form">
             <Formik
