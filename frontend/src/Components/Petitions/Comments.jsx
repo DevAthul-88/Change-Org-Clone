@@ -1,6 +1,6 @@
 import React from "react";
 import Loader from "../Loader";
-import {Link} from 'wouter'
+import { Link } from "wouter";
 import * as timeago from "timeago.js";
 
 function Comments({ loading, data }) {
@@ -12,7 +12,7 @@ function Comments({ loading, data }) {
         them, and share your reason for signing (this will mean a lot to the
         starter of the petition).
       </p>
-<hr />
+      <hr />
       {loading ? (
         <Loader />
       ) : (
@@ -22,8 +22,11 @@ function Comments({ loading, data }) {
               <div className="card" key={index}>
                 <div className="card-body">
                   <h5 className="card-title">
-                    <Link href={`/profile/${e.id}`} className="text-dark text-decoration-none">
-                    {e.user}
+                    <Link
+                      href={`/profile/${e.id}`}
+                      className="text-dark text-decoration-none"
+                    >
+                      {e.user}
                     </Link>
                   </h5>
                   <h6 className="card-subtitle mb-2 text-muted">
@@ -31,7 +34,6 @@ function Comments({ loading, data }) {
                   </h6>
                   {e.message}
                 </div>
-              
               </div>
             );
           })}
