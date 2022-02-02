@@ -13,7 +13,7 @@ function Post({ petitions }) {
             <div className="card-body">
               <div className="card-title">
                 <h3 className=" text-capitalize ">
-                  <Link href={`/petition/${e._id}`} className="text-dark text-decoration-none post_link rubik">
+                  <Link href={`/p/${e._id}`} className="text-dark text-decoration-none post_link rubik">
                   {e.title}
                   </Link>
                 </h3>
@@ -52,7 +52,7 @@ function Post({ petitions }) {
             <div className="card-footer d-flex justify-content-between">
               <h5 className="rubik">
                 {e.supporters.length} <span className="redColor">
-                  <Link href={`/petition/supporters/${e._id}`} className="text-decoration-none redColor">
+                  <Link href={`/s/supporters/${e._id}`} className="text-decoration-none redColor">
                   Supporters
                   </Link>
                 </span>

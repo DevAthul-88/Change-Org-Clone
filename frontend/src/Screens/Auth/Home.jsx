@@ -27,7 +27,7 @@ function Home() {
         {(params) => <Profile id={params.id} />}
       </Route>
       <Route path="/me/edit" component={UpdateProfile} />
-      <Route path="/petition/:id">
+      <Route path="/p/:id">
         {(params) => <PetitionPage id={params.id}/>}
       </Route>
     </div>
