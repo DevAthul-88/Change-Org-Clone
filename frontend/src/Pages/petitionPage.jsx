@@ -20,7 +20,7 @@ function PetitionPage({ id }) {
     if (route == "details") {
       return <Details loading={loading} userInfo={userInfo} data={data} />;
     } else if(route == "comment") {
-      return <Comment />;
+      return <Comment loading={loading} data={data}/>;
     }
   };
 

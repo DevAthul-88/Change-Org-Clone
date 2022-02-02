@@ -45,7 +45,7 @@ function Details({data , loading , userInfo}) {
             <hr />
             <p className="fs-5 mt-4">{data.description}</p>
           </div>
-          <div className="col">
+          <div className="col ">
             <h1 className="fs-4">
               Signature Goal: {data.supporters.length} of{" "}
               {data.expectedVote}
@@ -66,7 +66,9 @@ function Details({data , loading , userInfo}) {
                 <h1 className="fs-2">{userInfo.userName}</h1>
 
                 <textarea
-                  className="form-control"
+                  className="form-control mt-3"
+                  cols={20}
+                  rows={5}
                   name="message"
                   placeholder="I am signing because....."
                 ></textarea>

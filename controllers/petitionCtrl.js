@@ -1,3 +1,4 @@
+const { date } = require("joi");
 const petitionSchema = require("../model/petitionModel");
 
 
@@ -12,10 +13,11 @@ module.exports = {
                 description:req.body.description,
                 expectedVote:req.body.goal,
                 category:req.body.category,
-                supporters:{user:id , message:message},
+                supporters:{user:req.user.userName , id:id , message:message},
                 user:{
                     userName:req.user.userName,
                     id:id,
+                    createdAt:Date.now(),
                 }
             })
             await petition.save()
