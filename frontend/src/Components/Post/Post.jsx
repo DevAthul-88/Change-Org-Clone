@@ -33,17 +33,14 @@ function Post({ petitions }) {
                 <div className="d-grid">
                   {userInfo._id === e.user.id ? (
                     <div>
-                      <button className="btn btn-sm btn-primary btn mr-4">
-                        <strong>Edit</strong>
-                      </button>
-                      <button className="btn btn-sm btn-danger btn_red btn " style={{ marginLeft:"0.6rem"}}>
-                        <strong>Delete</strong>
-                      </button>
+                     
                     </div>
                   ) : (
-                    <button className="btn btn-danger btn_red btn">
-                      <strong>Sign this petition</strong>
-                    </button>
+                    <Link href={`/p/${e._id}`} >
+                     <a className="btn btn-danger btn_red">
+                     <strong>Sign this petition</strong>
+                     </a>
+                    </Link>
                   )}
                 </div>
               </div>

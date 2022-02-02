@@ -1,12 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "wouter";
 import * as timeago from "timeago.js";
 import Loader from "../Loader";
+import { useState } from "react";
 
 function Details({ data, loading, userInfo }) {
+  const [exists, setExists] = useState(false);
+
+  useEffect(() => {
+    if (data) {
+      if (data.supporters[0].id.indexOf(userInfo._id) !== -1) {
+        setExists(true);
+      }
+    }
+  }, []);
+
   return (
     <div>
-    
       {data == null || data == undefined ? (
         <h1>Nothing found</h1>
       ) : (
@@ -16,7 +26,7 @@ function Details({ data, loading, userInfo }) {
           ) : (
             <div className="row">
               <div className=" col-8">
-                <h1 className="rubik display-5 fw-bold">{data.title}</h1>
+                <h1 className="rubik display-5 fw-bold mb-2">{data.title}</h1>
 
                 <div className="d-flex justify-content-between">
                   <div>
@@ -30,18 +40,18 @@ function Details({ data, loading, userInfo }) {
                     </div>
                   </div>
                   <div>
-                    <span className=" fs-5  redColor fw-bold">
+                    <span className=" fs-6  redColor fw-bold">
                       Started this petition: {timeago.format(data.createdAt)}
                     </span>
                   </div>
 
                   <div>
-                    <h5>
+                    <h6>
                       Category:{" "}
                       <Link href="#" className="redColor text-capitalize">
                         {data.category}
                       </Link>
-                    </h5>
+                    </h6>
                   </div>
                 </div>
                 <hr />
@@ -64,23 +74,31 @@ function Details({ data, loading, userInfo }) {
                       }}
                     ></div>
                   </div>
+                  <hr />
                   <div className="mt-4">
-                    
                     {Object.keys(userInfo).length !== 0 ? (
                       <div>
                         <h1 className="fs-2">{userInfo.userName}</h1>
-                        <textarea
-                          className="form-control mt-3"
-                          cols={20}
-                          rows={5}
-                          name="message"
-                          placeholder="I am signing because....."
-                        ></textarea>
-                        <button className="btn mt-4 btn_red btn-danger">
-                          <strong>Sign this petition</strong>
-                        </button>
+                        {!exists ? (
+                          <div>
+                            <textarea
+                              className="form-control mt-3"
+                              cols={20}
+                              rows={5}
+                              name="message"
+                              placeholder="I am signing because....."
+                            ></textarea>
+                            <button className="btn mt-4 btn_red btn-danger">
+                              <strong>Sign this petition</strong>
+                            </button>
+                          </div>
+                        ) : (
+                          <h1 className="mt-4 fs-4 text-info">
+                            You already voted for this petition
+                          </h1>
+                        )}
                       </div>
-                    ): null}
+                    ) : null}
                   </div>
                 </div>
               </div>
