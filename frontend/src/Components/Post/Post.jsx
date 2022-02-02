@@ -20,7 +20,7 @@ function Post({ petitions }) {
               </div>
 
               <div className="card-text">
-                <p className="fs-5 text-truncate">{e.description}</p>
+                <p className="fs-6 text-truncate">{e.description}</p>
               </div>
 
               <div>

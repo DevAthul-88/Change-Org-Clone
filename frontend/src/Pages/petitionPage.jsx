@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { petitionById } from "../Redux/Single/action";
 import Details from "../Components/Petitions/Details";
 import Comment from "../Components/Petitions/Comments";
+import {Link} from 'wouter'
 
 function PetitionPage({ id }) {
   const dispatch = useDispatch();
@@ -63,6 +64,13 @@ function PetitionPage({ id }) {
         </div>
       </div>
       <div className="container mt-5">
+      {Object.keys(userInfo).length == 0 ? (
+        <div className="alert alert-success">
+          You need to <Link href="/login" className="alert-link">
+          login
+          </Link> to sign a petition
+        </div>
+      ) : null}
         <Main />
       </div>
     </div>
