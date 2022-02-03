@@ -80,18 +80,19 @@ function Details({ data, loading, userInfo }) {
                       <div>
                         <h1 className="fs-2">{userInfo.userName}</h1>
                         {!exists ? (
-                          <div>
+                          <form>
                             <textarea
                               className="form-control mt-3"
                               cols={20}
                               rows={5}
                               name="message"
                               placeholder="I am signing because....."
+                              required
                             ></textarea>
-                            <button className="btn mt-4 btn_red btn-danger">
+                            <button type="submit" className="btn mt-4 btn_red btn-danger">
                               <strong>Sign this petition</strong>
                             </button>
-                          </div>
+                          </form>
                         ) : (
                           <h1 className="mt-4 fs-4 text-info">
                             You already voted for this petition
