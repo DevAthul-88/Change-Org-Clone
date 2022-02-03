@@ -5,9 +5,11 @@ import profileAction from "../Redux/Profile/action";
 import Signed from "../Components/Petitions/Signed";
 import Started from "../Components/Petitions/Started";
 import Loading from "../Components/Loader";
+import * as timeago from "timeago.js";
+
 function Profile({ id }) {
   const dispatch = useDispatch();
-  const {userInfo} = useSelector((state) => state.login);
+  const { userInfo } = useSelector((state) => state.login);
   const { loading, profile } = useSelector((state) => state.profile);
   const [route, setRoute] = useState("started");
 
@@ -38,10 +40,9 @@ function Profile({ id }) {
               <div className="text-center">
                 <h1 className="text-capitalize display-2 fw-bold rubik">
                   {profile.userName}
-                </h1>
-                <p>
-                  {userInfo.description ? userInfo.description : null}
-                </p>
+                </h1>            
+                <h5>Joined: {timeago.format(profile.createdAt)}</h5>
+                <p className="fs-5 mt-4">{profile.description ? profile.description : null}</p>
                 <Link href={`/me/edit`}>
                   <a className="btn mt-4 btn-outline-dark">
                     <strong>Edit Profile</strong>
@@ -93,8 +94,11 @@ function Profile({ id }) {
           ) : (
             <div className="text-center">
               <h1 className="text-capitalize display-2 fw-bold rubik">
-              {profile.userName}
-            </h1>
+                {profile.userName}
+              </h1>
+              <h5>Joined: {timeago.format(profile.createdAt)}</h5>
+              <p className="fs-5 mt-4">{profile.description ? profile.description : null}</p>
+              <hr />
             </div>
           )}
         </div>

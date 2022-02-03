@@ -30,10 +30,12 @@ function UpdateProfile() {
               initialValues={{
                 email: userInfo.email,
                 userName: userInfo.userName,
+                desc:userInfo.description ? userInfo.description : " ",
                 id: userInfo._id,
               }}
               validationSchema={EditSchema}
               onSubmit={(values, { setSubmitting }) => {
+                
                 dispatch(EditProfileAction(values));
               }}
             >
@@ -77,6 +79,17 @@ function UpdateProfile() {
                     />
                     <div className="form-label text-danger">
                       {errors.email && touched.email && errors.email}
+                    </div>
+                  </div>
+
+                  <div className="mb-3">
+                    <label className="form-label">About You - (optional)</label>
+                    <textarea name="desc" className="form-control" cols={30} rows={10}
+                    defaultValue={userInfo.description ? userInfo.description : " "} 
+                    onChange={handleChange}
+                    ></textarea>
+                    <div className="form-label text-danger">
+                      {errors.desc && touched.desc && errors.desc}
                     </div>
                   </div>
 

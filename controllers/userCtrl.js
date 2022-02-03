@@ -62,6 +62,7 @@ const userCtrl = {
         _id: user._id,
         userName: user.userName,
         email: user.email,
+        description: user.description,
         createdAt: user.createdAt,
       };
       res.json({ token: token, status: true, user: userData });
@@ -72,12 +73,14 @@ const userCtrl = {
 
   edit: async (req, res) => {
     try {
-      const { id, email, userName } = req.body;
+      const { id, email, userName , desc  } = req.body;
 
       const user = {
         email: email,
         userName: userName,
+        description:desc,
       };
+      console.log(req.body);
       await userSchema.updateOne({ _id: id }, user);
 
       const data = await userSchema.findOne({ _id: id });
@@ -110,6 +113,7 @@ const userCtrl = {
        userName:data.userName,
        email:data.email,
        _id:data._id,
+       description: data.description,
        createdAt:data.createdAt
      }
      res.json(user)
