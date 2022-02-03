@@ -9,6 +9,7 @@ function Started() {
   const dispatch = useDispatch();
   const { loading, error, data } = useSelector((state) => state.post);
 
+
   useEffect(() => {
     dispatch(petitionStarted());
   }, []);
@@ -17,12 +18,12 @@ function Started() {
     <div>
       {loading ? (
         <Loader />
-      ) : !data || data == undefined ? (
+      ) :  data == null? (
         <h1>Nothing found</h1>
       ) : data.message ? (
         <h1 className='display-5  fs-bold rubik'>{data.message}</h1>
       ) : (
-        <Post petitions={data.data} />
+         Object.values(data)[0] == null ? <h1>Nothing found</h1> : <Post petitions={data.data} />
       )}
     </div>
   );

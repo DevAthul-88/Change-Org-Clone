@@ -88,9 +88,11 @@ function Profile({ id }) {
               </div>
             </div>
           ) : (
-            <h1 className="text-capitalize display-2 fw-bold rubik">
-              {profile.profile.userName}
+            <div className="text-center">
+              <h1 className="text-capitalize display-2 fw-bold rubik">
+              {profile.userName}
             </h1>
+            </div>
           )}
         </div>
       ) : null}
