@@ -5,11 +5,11 @@ const initialState = {};
 const commentReducer = (state = initialState, action) => {
   switch (action.type) {
     case COMMENT_REQUESTS:
-      return { loading: true };
+      return { loader: true };
     case COMMENT_ADDED:
-      return { loading: false, message: action.payload };
+      return { loader: false, messages: action.payload };
     case COMMENT_ERROR:
-      return { loading: false, error: action.payload };
+      return { loader: false, errors: action.payload };
       default: return state
   }
 };

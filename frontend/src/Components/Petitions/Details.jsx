@@ -1,10 +1,14 @@
 import React, { useEffect } from "react";
 import { Link } from "wouter";
+import { useSelector, useDispatch } from "react-redux";
+import { commentAction } from "../../Redux/Comment/action";
 import * as timeago from "timeago.js";
 import Loader from "../Loader";
 import { useState } from "react";
 
 function Details({ data, loading, userInfo }) {
+  const { loader, messages, errors } = useSelector((state) => state.comment);
+  const dispatch = useDispatch();
   const [exists, setExists] = useState(false);
 
   useEffect(() => {
@@ -14,6 +18,22 @@ function Details({ data, loading, userInfo }) {
       }
     }
   }, []);
+
+  const [message, setMessage] = useState("");
+
+  const onChange = (event) => {
+    const { value } = event.target;
+    setMessage(value);
+  };
+
+  const onSubmit = (event) => {
+    event.preventDefault();
+    const messageObj = {
+      message: message,
+      id: data._id,
+    };
+    dispatch(commentAction(messageObj))
+  };
 
   return (
     <div>
@@ -25,6 +45,13 @@ function Details({ data, loading, userInfo }) {
             <Loader />
           ) : (
             <div className="row">
+              {messages ? (
+                <div className="alert alert-success">{messages}</div>
+              ) : null}
+              {errors ? (
+                <div className="alert alert-danger">{errors}</div>
+              ) : null}
+
               <div className=" col-8">
                 <h1 className="rubik display-5 fw-bold mb-2">{data.title}</h1>
 
@@ -80,17 +107,27 @@ function Details({ data, loading, userInfo }) {
                       <div>
                         <h1 className="fs-2">{userInfo.userName}</h1>
                         {!exists ? (
-                          <form>
+                          <form onSubmit={onSubmit}>
                             <textarea
                               className="form-control mt-3"
                               cols={20}
                               rows={5}
                               name="message"
+                              value={message}
+                              onChange={onChange}
                               placeholder="I am signing because....."
                               required
                             ></textarea>
-                            <button type="submit" className="btn mt-4 btn_red btn-danger">
-                              <strong>Sign this petition</strong>
+                            <button
+                              type="submit"
+                              className="btn mt-4 btn_red btn-danger"
+                              disabled={loading}
+                            >
+                              {loader ? (
+                                <strong>Loading</strong>
+                              ) : (
+                                <strong>Sign this petition</strong>
+                              )}
                             </button>
                           </form>
                         ) : (

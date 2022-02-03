@@ -66,7 +66,7 @@ module.exports = {
   addComment: async (req, res) => {
     try {
       const { userName, _id } = req.user;
-      const { id, message } = req.body;
+      const { id, message } = req.body.message;
 
       const comment = {
         user: userName,
