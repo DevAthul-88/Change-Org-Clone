@@ -32,6 +32,7 @@ function Details({ data, loading, userInfo }) {
       message: message,
       id: data._id,
     };
+    console.log(messageObj);
     dispatch(commentAction(messageObj))
   };
 
@@ -106,13 +107,13 @@ function Details({ data, loading, userInfo }) {
                     {Object.keys(userInfo).length !== 0 ? (
                       <div>
                         <h1 className="fs-2">{userInfo.userName}</h1>
-                        {!exists ? (
+                        {exists ? (
                           <form onSubmit={onSubmit}>
                             <textarea
                               className="form-control mt-3"
                               cols={20}
                               rows={5}
-                              name="message"
+                              name="comment"
                               value={message}
                               onChange={onChange}
                               placeholder="I am signing because....."

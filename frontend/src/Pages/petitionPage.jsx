@@ -8,14 +8,18 @@ import {Link} from 'wouter'
 
 function PetitionPage({ id }) {
   const dispatch = useDispatch();
+  const [d , setD] = useState("")
   const { loading, data, error } = useSelector((state) => state.details);
   const { userInfo } = useSelector((state) => state.login);
 
   const [route, setRoute] = useState("details");
-
   function setKey(key) {
     setRoute(key);
   }
+
+  useEffect(() => {
+    setD(data)
+  },[data])
 
   const Main = () => {
     if (route == "details") {

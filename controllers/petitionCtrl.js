@@ -66,7 +66,7 @@ module.exports = {
   addComment: async (req, res) => {
     try {
       const { userName, _id } = req.user;
-      const { id, message } = req.body.message;
+      const { id, message } = req.body;
 
       const comment = {
         user: userName,
@@ -74,13 +74,12 @@ module.exports = {
         message: message,
       };
 
-      const petition = await petitionSchema.findOne({ "supporters.id": _id });
-      if (petition) return res.json({ error: "Alredy voted" });
       await petitionSchema.updateOne(
         { _id: id },
         { $push: { supporters: comment } }
       );
-      res.json({ message: "Your vote has been added successfully" });
+      const pet = await petitionSchema.findOne({_id:id})
+      res.json({ message: "Your vote has been added successfully" , data:pet});
     } catch (error) {
       res.json({ error: error.message });
     }
