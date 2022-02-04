@@ -31,7 +31,7 @@ function Post({ petitions }) {
                 </h5>
 
                 <div className="d-grid">
-                  {userInfo._id === e.user.id ? (
+                  {userInfo._id === e.user._id ? (
                     <div>
                      
                     </div>

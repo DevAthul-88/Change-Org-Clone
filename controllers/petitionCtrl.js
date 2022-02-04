@@ -1,4 +1,6 @@
 const petitionSchema = require("../model/petitionModel");
+const mongoose = require('mongoose')
+const objectId =  mongoose.Types.ObjectId
 
 module.exports = {
   create: async (req, res) => {
@@ -66,13 +68,14 @@ module.exports = {
   getSignedPetition: async (req ,res) => {
     try {
       
-      const {userId} = req.body;
+      const {_id} = req.user;
 
-      const petition = await petitionSchema.find({'supporters.id': userId});
-      console.log(petition);
-
+      const data = await petitionSchema.find({'supporters._id': _id});
+      console.log(data);
+       res.json(data)
     } catch (error) {
       res.json({ error: error.message });
+      console.log(error.message);
     }
   },
 
@@ -83,7 +86,7 @@ module.exports = {
 
       const comment = {
         user: userName,
-        id: _id,
+        _id: _id,
         message: message,
       };
 
