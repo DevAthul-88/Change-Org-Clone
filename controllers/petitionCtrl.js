@@ -63,6 +63,19 @@ module.exports = {
     }
   },
 
+  getSignedPetition: async (req ,res) => {
+    try {
+      
+      const {userId} = req.body;
+
+      const petition = await petitionSchema.find({'supporters.id': userId});
+      console.log(petition);
+
+    } catch (error) {
+      res.json({ error: error.message });
+    }
+  },
+
   addComment: async (req, res) => {
     try {
       const { userName, _id } = req.user;

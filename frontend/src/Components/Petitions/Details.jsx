@@ -12,12 +12,13 @@ function Details({ data, loading, userInfo }) {
   const [exists, setExists] = useState(false);
 
   useEffect(() => {
-    if (data) {
-      if (data.supporters[0].id.indexOf(userInfo._id) !== -1) {
-        setExists(true);
-      }
-    }
-  }, []);
+   if(data){
+    const checkExists = data.supporters.some((e) => e.id == userInfo._id)
+    console.log(checkExists);
+    setExists(checkExists)
+
+   }
+  }, [data]);
 
   const [message, setMessage] = useState("");
 
@@ -107,7 +108,7 @@ function Details({ data, loading, userInfo }) {
                     {Object.keys(userInfo).length !== 0 ? (
                       <div>
                         <h1 className="fs-2">{userInfo.userName}</h1>
-                        {exists ? (
+                        {!exists ? (
                           <form onSubmit={onSubmit}>
                             <textarea
                               className="form-control mt-3"
@@ -132,7 +133,7 @@ function Details({ data, loading, userInfo }) {
                             </button>
                           </form>
                         ) : (
-                          <h1 className="mt-4 fs-4 text-info">
+                          <h1 className="mt-4 fs-4 text-success">
                             You already voted for this petition
                           </h1>
                         )}
