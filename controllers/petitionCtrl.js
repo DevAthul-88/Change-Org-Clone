@@ -95,5 +95,22 @@ module.exports = {
       res.json({ error: error.message });
     }
   },
+
+  removeComment: async (req , res) => {
+    
+    try {
+     
+      const {id} = req.body
+      const removed = await petitionSchema.updateOne({_id:id} , {"$pull":{supporters:{_id:req.user._id}}})
+
+      if(removed){
+        const pet = await petitionSchema.findById(id)
+        res.json({status:true , data:pet})
+      }
+    
+    } catch (error) {
+      res.json({ error: error.message });
+    }
+  }
  
 };

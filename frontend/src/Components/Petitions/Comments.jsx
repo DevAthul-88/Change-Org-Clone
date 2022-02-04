@@ -1,9 +1,11 @@
 import React from "react";
 import Loader from "../Loader";
 import { Link } from "wouter";
+import { useSelector } from "react-redux";
 import * as timeago from "timeago.js";
 
 function Comments({ loading, data }) {
+  const { userInfo } = useSelector((state) => state.login);
   return (
     <div>
       <h1 className="fs-4 rubik">Reasons for signing</h1>
@@ -21,9 +23,9 @@ function Comments({ loading, data }) {
             return (
               <div className="card" key={index}>
                 <div className="card-body">
-                  <h5 className="card-title">
+                  <h5 className="card-title rubik">
                     <Link
-                      href={`/profile/${e.id}`}
+                      href={`/profile/${e._id}`}
                       className="text-dark text-decoration-none"
                     >
                       {e.user}
@@ -32,8 +34,16 @@ function Comments({ loading, data }) {
                   <h6 className="card-subtitle mb-2 text-muted">
                     {timeago.format(e.createdAt)}
                   </h6>
-                  {e.message}
+                  <p> {e.message}</p>
                 </div>
+
+                {e._id === userInfo._id ? (
+                  <div className="card-footer">
+                    <button className="btn rubik btn-danger btn-sm">
+                      <strong>Remove Sign</strong>
+                    </button>
+                  </div>
+                ) : null}
               </div>
             );
           })}

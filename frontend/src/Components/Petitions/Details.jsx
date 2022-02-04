@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Link } from "wouter";
 import { useSelector, useDispatch } from "react-redux";
-import { commentAction } from "../../Redux/Comment/action";
+import { commentAction, removeComment } from "../../Redux/Comment/action";
 import * as timeago from "timeago.js";
 import Loader from "../Loader";
 import { useState } from "react";
@@ -10,15 +10,20 @@ function Details({ data, loading, userInfo }) {
   const { loader, messages, errors } = useSelector((state) => state.comment);
   const dispatch = useDispatch();
   const [exists, setExists] = useState(false);
+  const [comment, setComment] = useState("");
 
   useEffect(() => {
-   if(data){
-    const checkExists = data.supporters.some((e) => e._id == userInfo._id)
-    console.log(checkExists);
-    setExists(checkExists)
-
-   }
+    if (data) {
+      const checkExists = data.supporters.some((e) => e._id == userInfo._id);
+      setExists(checkExists);
+      const commentAdd = data.supporters.filter((e) => e._id == userInfo._id);
+      setComment(commentAdd[0]);
+    }
   }, [data]);
+
+  const handleRemove = (id) => {
+   dispatch(removeComment(id))
+  }
 
   const [message, setMessage] = useState("");
 
@@ -33,8 +38,7 @@ function Details({ data, loading, userInfo }) {
       message: message,
       id: data._id,
     };
-    console.log(messageObj);
-    dispatch(commentAction(messageObj))
+    dispatch(commentAction(messageObj));
   };
 
   return (
@@ -107,9 +111,9 @@ function Details({ data, loading, userInfo }) {
                   <div className="mt-4">
                     {Object.keys(userInfo).length !== 0 ? (
                       <div>
-                        <h1 className="fs-2">{userInfo.userName}</h1>
                         {!exists ? (
                           <form onSubmit={onSubmit}>
+                            <h1 className="fs-2">{userInfo.userName}</h1>
                             <textarea
                               className="form-control mt-3"
                               cols={20}
@@ -133,9 +137,35 @@ function Details({ data, loading, userInfo }) {
                             </button>
                           </form>
                         ) : (
-                          <h1 className="mt-4 fs-4 text-success">
-                            You already voted for this petition
-                          </h1>
+                          <div>
+                            {comment !== null ? (
+                              <div className="card mt-4">
+                                <div className="card-body">
+                                  <div className="card-title rubik">
+                                    <Link
+                                      href={`/profile/${comment._id}`}
+                                      className="text-dark text-decoration-none"
+                                    >
+                                      {comment.user}
+                                    </Link>
+                                  </div>
+                                  <h6 className="card-subtitle mb-2 text-muted">
+                                    {timeago.format(comment.createdAt)}
+                                  </h6>
+                                  <p>{comment.message}</p>
+                                </div>
+                                <div className="card footer">
+                                  <button className="btn btn-danger btn-sm">
+                                    <strong className="rubik" onClick={() => handleRemove(data._id)}>
+                                      Remove Sign
+                                    </strong>
+                                  </button>
+                                </div>
+                              </div>
+                            ) : (
+                              <loader />
+                            )}
+                          </div>
                         )}
                       </div>
                     ) : null}
