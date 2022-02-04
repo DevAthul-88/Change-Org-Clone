@@ -1,8 +1,18 @@
 const petitionSchema = require("../model/petitionModel");
 const mongoose = require("mongoose");
-const objectId = mongoose.Types.ObjectId;
+const objectId =  mongoose.Types.ObjectId;
 
 module.exports = {
+  getSignedPetition: async (req, res) => {
+    try {
+      const { _id } = req.user;
+      const data = await petitionSchema.find({"supporters._id":_id})
+      res.json({data:data});
+    } catch (error) {
+      console.log(error.error);
+      res.json({ error: error.message });
+    }
+  },
   create: async (req, res) => {
     try {
       console.log(req.body);
@@ -64,19 +74,6 @@ module.exports = {
       res.json({ error: error.message });
     }
   },
-
-  getSignedPetition: async (req, res) => {
-    console.log("Function running");
-    try {
-      const { _id } = req.user;
-      const data = await petitionSchema.find({ "supporters.id": _id });
-      res.json(data);
-    } catch (error) {
-      console.log(error.error);
-      res.json({ error: error.message });
-    }
-  },
-
   addComment: async (req, res) => {
     try {
       const { userName, _id } = req.user;
@@ -84,7 +81,7 @@ module.exports = {
 
       const comment = {
         user: userName,
-        _id: _id.toString(),
+        _id: _id,
         message: message,
       };
 
@@ -98,4 +95,5 @@ module.exports = {
       res.json({ error: error.message });
     }
   },
+ 
 };

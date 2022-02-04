@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 
 const petitionSchema = new mongoose.Schema({
+ 
   title: {
     type: String,
     required: true,
