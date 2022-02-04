@@ -1,6 +1,6 @@
 const petitionSchema = require("../model/petitionModel");
-const mongoose = require('mongoose')
-const objectId =  mongoose.Types.ObjectId
+const mongoose = require("mongoose");
+const objectId = mongoose.Types.ObjectId;
 
 module.exports = {
   create: async (req, res) => {
@@ -65,17 +65,15 @@ module.exports = {
     }
   },
 
-  getSignedPetition: async (req ,res) => {
+  getSignedPetition: async (req, res) => {
+    console.log("Function running");
     try {
-      
-      const {_id} = req.user;
-
-      const data = await petitionSchema.find({'supporters._id': _id});
-      console.log(data);
-       res.json(data)
+      const { _id } = req.user;
+      const data = await petitionSchema.find({ "supporters.id": _id });
+      res.json(data);
     } catch (error) {
+      console.log(error.error);
       res.json({ error: error.message });
-      console.log(error.message);
     }
   },
 
@@ -86,7 +84,7 @@ module.exports = {
 
       const comment = {
         user: userName,
-        _id: _id,
+        _id: _id.toString(),
         message: message,
       };
 
@@ -94,8 +92,8 @@ module.exports = {
         { _id: id },
         { $push: { supporters: comment } }
       );
-      const pet = await petitionSchema.findOne({_id:id})
-      res.json({ message: "Your vote has been added successfully" , data:pet});
+      const pet = await petitionSchema.findOne({ _id: id });
+      res.json({ message: "Your vote has been added successfully", data: pet });
     } catch (error) {
       res.json({ error: error.message });
     }

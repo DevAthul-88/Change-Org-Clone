@@ -31,11 +31,11 @@ export const petitionByDate = () => async (dispatch) => {
     dispatch({ type: PETITION_ERROR, payload: error.message });
   }
 };
-export const petitionSigned = () => async (dispatch) => {
+export const petitionSigned = (id) => async (dispatch) => {
   try {
     dispatch({ type: PETITION_REQUESTED });
     const { data } = await axios.get("/api/petition/signed",  config);
-    console.log(data);
+    console.log(data.error);
     dispatch({ type: PETITION_SIGNED, data: data });
   } catch (error) {
     dispatch({ type: PETITION_ERROR, payload: error.message });

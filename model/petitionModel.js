@@ -31,7 +31,8 @@ const petitionSchema = new mongoose.Schema({
     type:Object,
     default:{},
     required: true,
-  }
+  },
+ 
 },{timestamps:true});
 
 const petition = mongoose.model("Petition", petitionSchema);

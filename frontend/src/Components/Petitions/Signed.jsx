@@ -8,7 +8,7 @@ import Loader from '../Loader';
 function Signed() {
   const dispatch = useDispatch();
   const {loading , error , data} = useSelector((state) => state.details)
-console.log(data);
+
   useEffect(() => {
     dispatch(petitionSigned())
   },[])
