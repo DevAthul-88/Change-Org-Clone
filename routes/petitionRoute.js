@@ -12,6 +12,7 @@ Router.route("/create").post(authMiddleware, petitionCtrl.create);
 Router.route("/getByUser").get(authMiddleware, petitionCtrl.getPetitionByUser);
 Router.route("/:id").get(petitionCtrl.getPetitionById);
 Router.route("/edit").patch(authMiddleware, petitionCtrl.editPetition);
+Router.route("/declare").post(authMiddleware, petitionCtrl.declareVictory)
 Router.route("/comment").post(authMiddleware, petitionCtrl.addComment);
 Router.route("/removeComment").post(authMiddleware, petitionCtrl.removeComment);
 

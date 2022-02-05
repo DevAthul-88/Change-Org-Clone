@@ -175,4 +175,11 @@ module.exports = {
       res.json({ error: error.message });
     }
   },
+  declareVictory: async (req, res) => {
+    try {
+      console.log(req.body);
+    } catch (error) {
+      res.json({ error: error.message });
+    }
+  }
 };
