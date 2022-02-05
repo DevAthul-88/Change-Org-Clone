@@ -33,10 +33,12 @@ function Post({ petitions }) {
                 </h5>
 
                 <div className="d-grid">
-                  {userInfo._id === e.user._id ? (
-                    <div>
-                     
-                    </div>
+                  {e.supporters.some(e => e.id == userInfo._id) ? (
+                    
+                      <a className="btn btn-danger btn_red btn-block disabled">
+                    <strong>Voted</strong>
+                    </a>
+                
                   ) : <>
                   {e.supporters.length !== e.expectedVote ? (
                     <Link href={`/p/${e._id}`} >
@@ -51,7 +53,7 @@ function Post({ petitions }) {
             </div>
 
             <div className="card-footer d-flex justify-content-between">
-              <h5 className="rubik">
+              <h5 className="rubik fs-6">
                 {e.supporters.length} <span className="redColor">
                   <Link href={`/s/supporters/${e._id}`} className="text-decoration-none redColor">
                   Supporters
@@ -60,9 +62,9 @@ function Post({ petitions }) {
               </h5>
 
               <div>
-                <h5 className="ml-4 rubik">
+                <h5 className="ml-4 rubik fs-6">
                   {e.completed ? (
-                    <h5 className="rubik fw-bold">Victory</h5>
+                    <h5 className="rubik fw-bold fs-6">Victory</h5>
                   ) : (
                     <>
                       Needs {e.expectedVote - e.supporters.length} more signatures
@@ -71,7 +73,7 @@ function Post({ petitions }) {
                 </h5>
               </div>
 
-              <h5 className="rubik">
+              <h5 className="rubik fs-6">
                 <span>
                   <i className="fa fa-folder" aria-hidden="true"></i> Category:{" "}
                 </span>

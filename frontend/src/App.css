@@ -59,7 +59,3 @@
 .post_link:hover{
     color: var(--red) !important;
 }
-.disabled{
-    color: #777777 !important;
-    cursor: not-allowed !important;
-}
