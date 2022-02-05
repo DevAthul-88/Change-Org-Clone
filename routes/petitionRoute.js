@@ -5,6 +5,7 @@ const authMiddleware = require("../middleware/auth");
 Router.route("/getSigned").get(authMiddleware, petitionCtrl.getSignedPetition);
 Router.route("/featured").get(petitionCtrl.featured)
 Router.route("/popular").get(petitionCtrl.popular)
+Router.route("/recent").get(petitionCtrl.recent)
 Router.route("/create").post(authMiddleware, petitionCtrl.create);
 Router.route("/getByUser").get(authMiddleware, petitionCtrl.getPetitionByUser);
 Router.route("/getByDate").get(petitionCtrl.getPetitionByDate);

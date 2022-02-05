@@ -131,4 +131,13 @@ module.exports = {
       res.json({ error: error.message });
     }
   },
+  recent: async (req, res) => {
+    try {
+      const data = await petitionSchema.find().sort({createdAt : 1});
+      if (!data) return res.json({ message: "Nothing found" });
+      res.json(data);
+    } catch (error) {
+      res.json({ error: error.message });
+    }
+  },
 };

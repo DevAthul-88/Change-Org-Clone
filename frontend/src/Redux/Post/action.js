@@ -45,8 +45,17 @@ export const petitionFeatured = () => async (dispatch) => {
   try {
     dispatch({ type: PETITION_REQUESTED });
     const { data } = await axios.get("/api/petition/featured");
-    console.log(data);
     dispatch({ type: PETITION_FEATURED, payload: data });
+  } catch (error) {
+    dispatch({ type: PETITION_ERROR, payload: error.message });
+  }
+}
+
+export const petitionPopular = () => async (dispatch) => {
+  try {
+    dispatch({ type: PETITION_REQUESTED });
+    const { data } = await axios.get("/api/petition/popular");
+    dispatch({ type: PETITION_POPULAR, payload: data });
   } catch (error) {
     dispatch({ type: PETITION_ERROR, payload: error.message });
   }
