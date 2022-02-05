@@ -1,6 +1,6 @@
 const petitionSchema = require("../model/petitionModel");
 const mongoose = require("mongoose");
-
+const objectId = mongoose.Types.ObjectId
 
 module.exports = {
   getSignedPetition: async (req, res) => {
@@ -153,7 +153,16 @@ module.exports = {
 
   editPetition: async (req , res) => {
     try {
-      console.log(req.body);
+     const {title , description , goal , petitionId, userId} = req.body.credentials;
+     const data = await petitionSchema.updateOne({_id:objectId(petitionId ), 'user.id':objectId(userId)}, {$set:{
+       title:title,
+       description:description,
+       expectedVote:goal,
+     }})
+     if(data.modifiedCount == 1){
+       const data = await petitionSchema.findById(petitionId)
+       res.json({status: true , data: data})
+     }
     } catch (error) {
       res.json({ error: error.message });
     }

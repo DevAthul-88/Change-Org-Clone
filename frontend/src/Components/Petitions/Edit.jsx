@@ -6,15 +6,19 @@ import { editPetitionAction } from "../../Redux/EditPetition/action";
 
 function UpdatePetition() {
   const { data } = useSelector((state) => state.details);
-  const { loading, status, error } = useSelector((state) => state.editPetition);
+  const { loading, status, error  } = useSelector((state) => state.editPetition);
   const { userInfo } = useSelector((state) => state.login);
 
   const dispatch = useDispatch();
+
+
+
+
   return (
     <div className="container mt-5">
       {status ? (
         <div className="alert alert-success" role="alert">
-          Profile updated successfully
+          Petition updated successfully
         </div>
       ) : null}
       {error ? (
