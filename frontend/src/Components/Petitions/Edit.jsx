@@ -2,11 +2,12 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Formik } from "formik";
 import EditSchema from "../../Schema/EditPetition";
-
+import { editPetitionAction } from "../../Redux/EditPetition/action";
 
 function UpdatePetition() {
   const { data } = useSelector((state) => state.details);
-  const { loading, status, error } = useSelector((state) => state.editProfile);
+  const { loading, status, error } = useSelector((state) => state.editPetition);
+  const { userInfo } = useSelector((state) => state.login);
 
   const dispatch = useDispatch();
   return (
@@ -28,14 +29,15 @@ function UpdatePetition() {
           <div className="form">
             <Formik
               initialValues={{
-                title:data.title,
-                description:data.description,
+                title: data.title,
+                description: data.description,
                 goal: data.expectedVote,
+                petitionId: data._id,
+                userId: userInfo._id,
               }}
               validationSchema={EditSchema}
               onSubmit={(values, { setSubmitting }) => {
-                
-                console.log(values);
+                dispatch(editPetitionAction(values));
               }}
             >
               {({
@@ -48,8 +50,6 @@ function UpdatePetition() {
                 isSubmitting,
               }) => (
                 <form onSubmit={handleSubmit}>
-                 
-
                   <div className="mb-3">
                     <label className="form-label">Title</label>
                     <input
@@ -59,7 +59,6 @@ function UpdatePetition() {
                         errors.title ? "border-danger" : null
                       }`}
                       value={values.title}
-                      defaultValue={data.title}
                       onChange={handleChange}
                       onBlur={handleBlur}
                     />
@@ -77,7 +76,6 @@ function UpdatePetition() {
                         errors.goal ? "border-danger" : null
                       }`}
                       value={values.goal}
-                      defaultValue={data.expectedVote}
                       onBlur={handleBlur}
                       onChange={handleChange}
                     />
@@ -88,14 +86,19 @@ function UpdatePetition() {
 
                   <div className="mb-3">
                     <label className="form-label">Description</label>
-                    <textarea name="description" className="form-control" cols={30} rows={10}
-                    defaultValue={data.description} 
-                    value={values.description}
-                    onBlur={handleBlur}
-                    onChange={handleChange}
+                    <textarea
+                      name="description"
+                      className="form-control"
+                      cols={30}
+                      rows={10}
+                      value={values.description}
+                      onBlur={handleBlur}
+                      onChange={handleChange}
                     ></textarea>
                     <div className="form-label text-danger">
-                      {errors.description && touched.description && errors.description}
+                      {errors.description &&
+                        touched.description &&
+                        errors.description}
                     </div>
                   </div>
 
