@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { petitionSigned } from "../../Redux/Post/action";
+import { petitionSigned } from "../../Redux/Signed/action";
 import Post from "../Post/Post";
 import Loader from "../Loader";
 
 function Signed() {
   const dispatch = useDispatch();
-  const { loading, error, data } = useSelector((state) => state.post);
+  const { loading, error, data } = useSelector((state) => state.signed);
 
   useEffect(() => {
     dispatch(petitionSigned());
@@ -22,7 +22,7 @@ function Signed() {
       ) : Object.values(data)[0].length < 1 ? (
         <h1 className="text-center rubik fw-bold">Nothing found</h1>
       ) : (
-        <Post petitions={data.data} />
+        <Post petitions={data} />
       )}
     </div>
   );

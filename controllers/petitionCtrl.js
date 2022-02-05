@@ -6,7 +6,7 @@ module.exports = {
   getSignedPetition: async (req, res) => {
     try {
       const { _id } = req.user;
-      const data = await petitionSchema.find({ "supporters._id": _id });
+      const data = await petitionSchema.find({ "supporters.id": objectId(_id) });
       if (data.length < 1) return res.json({ message: "Nothing found" });
       res.json( data );
     } catch (error) {

@@ -85,7 +85,7 @@ function UpdateProfile() {
                   <div className="mb-3">
                     <label className="form-label">About You - (optional)</label>
                     <textarea name="desc" className="form-control" cols={30} rows={10}
-                    defaultValue={userInfo.description ? userInfo.description : " "} 
+                    defaultValue={values.desc} 
                     onChange={handleChange}
                     ></textarea>
                     <div className="form-label text-danger">

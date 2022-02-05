@@ -9,6 +9,7 @@ import commentReducer from "./Comment/reducer";
 import allReducer from "./All/reducer";
 import discoverReducer from "./Discover/reducer";
 import editPetitionReducer from "./EditPetition/reducer";
+import signedPetitionReducer from "./Signed/reducer"
 
 export default combineReducers({
   login: loginReducer,
@@ -21,4 +22,5 @@ export default combineReducers({
   all: allReducer,
   discover: discoverReducer,
   editPetition: editPetitionReducer,
+  signed: signedPetitionReducer,
 });
