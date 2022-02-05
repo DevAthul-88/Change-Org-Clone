@@ -15,7 +15,7 @@ export default combineReducers({
   login: loginReducer,
   editProfile: editProfileReducer,
   create: petitionCreateReducer,
-  post: postReducer,
+  started: postReducer,
   profile: profileReducer,
   details: detailsReducer,
   comment: commentReducer,

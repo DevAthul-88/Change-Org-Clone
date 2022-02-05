@@ -7,10 +7,12 @@ import Post from "../Post/Post";
 
 function Started() {
   const dispatch = useDispatch();
-  const { loading, error, data } = useSelector((state) => state.post);
+  const { loading, error, data } = useSelector((state) => state.started);
 
   useEffect(() => {
     dispatch(petitionStarted());
+
+   
   }, []);
 
   return (
@@ -24,7 +26,7 @@ function Started() {
       ) : Object.values(data)[0].length < 1 ? (
         <h1 className="text-center rubik fw-bold">Nothing found</h1>
       ) : (
-        <Post petitions={data.data} />
+        <Post petitions={data} />
       )}
     </div>
   );

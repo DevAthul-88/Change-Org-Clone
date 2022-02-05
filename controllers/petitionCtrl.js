@@ -1,14 +1,16 @@
 const petitionSchema = require("../model/petitionModel");
 const mongoose = require("mongoose");
-const objectId = mongoose.Types.ObjectId
+const objectId = mongoose.Types.ObjectId;
 
 module.exports = {
   getSignedPetition: async (req, res) => {
     try {
       const { _id } = req.user;
-      const data = await petitionSchema.find({ "supporters.id": objectId(_id) });
+      const data = await petitionSchema.find({
+        "supporters.id": objectId(_id),
+      });
       if (data.length < 1) return res.json({ message: "Nothing found" });
-      res.json( data );
+      res.json(data);
     } catch (error) {
       console.log(error.error);
       res.json({ error: error.message });
@@ -45,10 +47,10 @@ module.exports = {
   getPetitionByUser: async (req, res) => {
     try {
       const user = req.user._id;
-      const petition = await petitionSchema.find({ "user.id": user });
-      if (petition.length < 1) return res.json({ message: "Nothing found" });
+      const data = await petitionSchema.find({ "user.id": user });
+      if (data.length < 1) return res.json({ message: "Nothing found" });
 
-      res.json({ data: petition });
+      res.json(data);
     } catch (error) {
       res.json({ error: error.message });
     }
@@ -125,7 +127,7 @@ module.exports = {
   },
   popular: async (req, res) => {
     try {
-      const data = await petitionSchema.find().sort({supporters : 1});
+      const data = await petitionSchema.find().sort({ supporters: 1 });
       if (data.length < 1) return res.json({ message: "Nothing found" });
       res.json(data);
     } catch (error) {
@@ -134,7 +136,7 @@ module.exports = {
   },
   recent: async (req, res) => {
     try {
-      const data = await petitionSchema.find().sort({createdAt : 1});
+      const data = await petitionSchema.find().sort({ createdAt: 1 });
       if (data.length < 1) return res.json({ message: "Nothing found" });
       res.json(data);
     } catch (error) {
@@ -143,7 +145,7 @@ module.exports = {
   },
   victory: async (req, res) => {
     try {
-      const data = await petitionSchema.find({completed:true});
+      const data = await petitionSchema.find({ completed: true });
       if (data.length < 1) return res.json({ message: "Nothing found" });
       res.json(data);
     } catch (error) {
@@ -151,20 +153,26 @@ module.exports = {
     }
   },
 
-  editPetition: async (req , res) => {
+  editPetition: async (req, res) => {
     try {
-     const {title , description , goal , petitionId, userId} = req.body.credentials;
-     const data = await petitionSchema.updateOne({_id:objectId(petitionId ), 'user.id':objectId(userId)}, {$set:{
-       title:title,
-       description:description,
-       expectedVote:goal,
-     }})
-     if(data.modifiedCount == 1){
-       const data = await petitionSchema.findById(petitionId)
-       res.json({status: true , data: data})
-     }
+      const { title, description, goal, petitionId, userId } =
+        req.body.credentials;
+      const data = await petitionSchema.updateOne(
+        { _id: objectId(petitionId), "user.id": objectId(userId) },
+        {
+          $set: {
+            title: title,
+            description: description,
+            expectedVote: goal,
+          },
+        }
+      );
+      if (data.modifiedCount == 1) {
+        const data = await petitionSchema.findById(petitionId);
+        res.json({ status: true, data: data });
+      }
     } catch (error) {
       res.json({ error: error.message });
     }
-  }
+  },
 };
