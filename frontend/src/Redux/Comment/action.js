@@ -36,12 +36,15 @@ export const removeComment = (id) => async (dispatch) => {
 
     const { data } = await axios.post(
       "/api/petition/removeComment",
-      {id:id},
+      { id: id },
       config
     );
 
     if (data.status) {
-      dispatch({ type: REMOVED_COMMENTS, payload: "Comment removed successfully" });
+      dispatch({
+        type: REMOVED_COMMENTS,
+        payload: "Comment removed successfully",
+      });
       dispatch({ type: DETAILS_SUCCESS, payload: data.data });
     } else {
       dispatch({ type: REMOVE_ERRORS, payload: data.error });

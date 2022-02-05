@@ -10,15 +10,18 @@ function Details({ data, loading, userInfo }) {
   const { loader, messages, errors } = useSelector((state) => state.comment);
   const dispatch = useDispatch();
   const [exists, setExists] = useState(false);
+  const [check, setCheck] = useState(false);
   const [comment, setComment] = useState("");
 
   useEffect(() => {
     if (data) {
-      const checkExists = data.supporters.some((e) => e.id == userInfo._id);
+      const checkExists = data.supporters.some((e) => e._id == userInfo._id);
       setExists(checkExists);
-      const commentAdd = data.supporters.filter((e) => e.id == userInfo._id);
+      const commentAdd = data.supporters.filter((e) => e._id == userInfo._id);
       setComment(commentAdd[0]);
-      
+      if (data.user.id == userInfo._id) {
+        setCheck(true);
+      }
     }
   }, [data]);
 
@@ -110,69 +113,75 @@ function Details({ data, loading, userInfo }) {
                   </div>
                   <hr />
                   <div className="mt-4">
-                    {Object.keys(userInfo).length !== 0 ? (
+                    {check ? (
+                      ""
+                    ) : (
                       <div>
-                        {!exists ? (
-                          <form onSubmit={onSubmit}>
-                            <h1 className="fs-2">{userInfo.userName}</h1>
-                            <textarea
-                              className="form-control mt-3"
-                              cols={20}
-                              rows={5}
-                              name="comment"
-                              value={message}
-                              onChange={onChange}
-                              placeholder="I am signing because....."
-                              required
-                            ></textarea>
-                            <button
-                              type="submit"
-                              className="btn mt-4 btn_red btn-danger"
-                              disabled={loading}
-                            >
-                              {loader ? (
-                                <strong>Loading</strong>
-                              ) : (
-                                <strong>Sign this petition</strong>
-                              )}
-                            </button>
-                          </form>
-                        ) : (
+                        {Object.keys(userInfo).length !== 0 ? (
                           <div>
-                            {comment !== null ? (
-                              <div className="card mt-4">
-                                <div className="card-body">
-                                  <div className="card-title rubik">
-                                    <Link
-                                      href={`/profile/${comment._id}`}
-                                      className="text-dark text-decoration-none"
-                                    >
-                                      {comment.user}
-                                    </Link>
-                                  </div>
-                                  <h6 className="card-subtitle mb-2 text-muted">
-                                    {timeago.format(comment.createdAt)}
-                                  </h6>
-                                  <p>{comment.message}</p>
-                                </div>
-                                <div className="card footer">
-                                  <button className="btn btn-danger btn-sm">
-                                    <strong
-                                      className="rubik"
-                                      onClick={() => handleRemove(data._id)}
-                                    >
-                                      Remove Sign
-                                    </strong>
-                                  </button>
-                                </div>
-                              </div>
+                            {!exists ? (
+                              <form onSubmit={onSubmit}>
+                                <h1 className="fs-2">{userInfo.userName}</h1>
+                                <textarea
+                                  className="form-control mt-3"
+                                  cols={20}
+                                  rows={5}
+                                  name="comment"
+                                  value={message}
+                                  onChange={onChange}
+                                  placeholder="I am signing because....."
+                                  required
+                                ></textarea>
+                                <button
+                                  type="submit"
+                                  className="btn mt-4 btn_red btn-danger"
+                                  disabled={loading}
+                                >
+                                  {loader ? (
+                                    <strong>Loading</strong>
+                                  ) : (
+                                    <strong>Sign this petition</strong>
+                                  )}
+                                </button>
+                              </form>
                             ) : (
-                              <loader />
+                              <div>
+                                {comment !== null ? (
+                                  <div className="card mt-4">
+                                    <div className="card-body">
+                                      <div className="card-title rubik">
+                                        <Link
+                                          href={`/profile/${comment._id}`}
+                                          className="text-dark text-decoration-none"
+                                        >
+                                          {comment.user}
+                                        </Link>
+                                      </div>
+                                      <h6 className="card-subtitle mb-2 text-muted">
+                                        {timeago.format(comment.createdAt)}
+                                      </h6>
+                                      <p>{comment.message}</p>
+                                    </div>
+                                    <div className="card footer">
+                                      <button className="btn btn-danger btn-sm">
+                                        <strong
+                                          className="rubik"
+                                          onClick={() => handleRemove(data._id)}
+                                        >
+                                          Remove Sign
+                                        </strong>
+                                      </button>
+                                    </div>
+                                  </div>
+                                ) : (
+                                  <Loader />
+                                )}
+                              </div>
                             )}
                           </div>
-                        )}
+                        ) : null}
                       </div>
-                    ) : null}
+                    )}
                   </div>
                 </div>
               </div>
