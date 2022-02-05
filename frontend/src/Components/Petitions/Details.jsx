@@ -114,7 +114,20 @@ function Details({ data, loading, userInfo }) {
                   <hr />
                   <div className="mt-4">
                     {check ? (
-                      ""
+                      <div>
+                       {data.completed ? (
+                          <div className="alert alert-success" role="alert">
+                          <h4 className="alert-heading">Well done!</h4>
+                          <p>
+                          This petition made change with {data.supporters.length} supporters!
+                          </p>
+                          <hr />
+                          <p className="mb-0">
+                           Author of this petition has declared this petition was victorious
+                          </p>
+                        </div>
+                       ):null}
+                      </div>
                     ) : (
                       <div>
                         {Object.keys(userInfo).length !== 0 ? (

@@ -37,13 +37,15 @@ function Post({ petitions }) {
                     <div>
                      
                     </div>
-                  ) : (
+                  ) : <>
+                  {e.supporters.length !== e.expectedVote ? (
                     <Link href={`/p/${e._id}`} >
-                     <a className="btn btn-danger btn_red">
-                     <strong>Sign this petition</strong>
-                     </a>
-                    </Link>
-                  )}
+                    <a className="btn btn-danger btn_red">
+                    <strong>Sign this petition</strong>
+                    </a>
+                   </Link>
+                  ) : null}
+                  </>}
                 </div>
               </div>
             </div>
@@ -59,8 +61,8 @@ function Post({ petitions }) {
 
               <div>
                 <h5 className="ml-4 rubik">
-                  {e.supporters.length === e.expectedVote ? (
-                    "Victory"
+                  {e.completed ? (
+                    <h5 className="rubik fw-bold">Victory</h5>
                   ) : (
                     <>
                       Needs {e.expectedVote - e.supporters.length} more signatures
