@@ -1,9 +1,4 @@
-import {
-  DETAILS_ERROR,
-  DETAILS_REQUEST,
-  DETAILS_SUCCESS,
-  DECLARE_VICTORY,
-} from "./type";
+import { DETAILS_ERROR, DETAILS_REQUEST, DETAILS_SUCCESS } from "./type";
 
 const initialState = {};
 
@@ -13,8 +8,6 @@ const detailsReducer = (state = initialState, action) => {
       return { loading: true };
     case DETAILS_SUCCESS:
       return { loading: false, data: action.payload };
-    case DECLARE_VICTORY:
-      return { loading: false, redirect: true };
     case DETAILS_ERROR:
       return { loading: false, error: action.payload };
     default:

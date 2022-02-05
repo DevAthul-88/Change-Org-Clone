@@ -9,7 +9,8 @@ import commentReducer from "./Comment/reducer";
 import allReducer from "./All/reducer";
 import discoverReducer from "./Discover/reducer";
 import editPetitionReducer from "./EditPetition/reducer";
-import signedPetitionReducer from "./Signed/reducer"
+import signedPetitionReducer from "./Signed/reducer";
+import declareReducer from "./Declare/reducer";
 
 export default combineReducers({
   login: loginReducer,
@@ -17,6 +18,7 @@ export default combineReducers({
   create: petitionCreateReducer,
   started: postReducer,
   profile: profileReducer,
+  declare: declareReducer,
   details: detailsReducer,
   comment: commentReducer,
   all: allReducer,

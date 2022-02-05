@@ -11,9 +11,9 @@ const editPetitionReducer = (state = initialState, action) => {
     case EDIT_PETITION_REQUEST:
       return { loading: true };
     case EDIT_PETITION_SUCCESS:
-      return { loading: false, status: action.status};
+      return { loading: false, status: action.status };
     case EDIT_PETITION_ERROR:
-      return { loading: false, error: action.message};
+      return { loading: false, error: action.message };
 
     default:
       return state;

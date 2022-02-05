@@ -31,7 +31,7 @@ function PetitionPage({ id }) {
     } else if (route == "edit-this-petition") {
       return <Edit />;
     } else if (route == "declare-victory") {
-      return <Declare />;
+      return <Declare data={data} />;
     }
   };
 
@@ -71,43 +71,47 @@ function PetitionPage({ id }) {
               </a>
             </li>
 
-           {
-             data && (
-               <>
-                 {data.user.id == userInfo._id ? (
+            {data && (
               <>
-                <li className="nav-item">
-                  <a
-                    href="#edit-this-petition"
-                    className={
-                      route === "edit-this-petition"
-                        ? "nav-link tab-link active"
-                        : `nav-link tab-link ${!data.completed ? "" : 'disabled'}`
-                    }
-                    onClick={() => setKey("edit-this-petition")}
-                  >
-                    Edit this petition
-                  </a>
-                </li>
+                {data.user.id == userInfo._id ? (
+                  <>
+                    <li className="nav-item">
+                      <a
+                        href="#edit-this-petition"
+                        className={
+                          route === "edit-this-petition"
+                            ? "nav-link tab-link active"
+                            : `nav-link tab-link ${
+                                !data.completed ? "" : "disabled"
+                              }`
+                        }
+                        onClick={() => setKey("edit-this-petition")}
+                      >
+                        Edit this petition
+                      </a>
+                    </li>
 
-                <li className="nav-item">
-                  <a
-                    href="#declare-victory"
-                    className={
-                      route === "declare-victory"
-                        ? "nav-link tab-link active"
-                        : `nav-link tab-link ${data.supporters.length === data.expectedVote ? "" : 'disabled'} ${!data.completed ? "" : 'disabled'}`
-                    }
-                    onClick={() => setKey("declare-victory")}
-                  >
-                    Declare victory
-                  </a>
-                </li>
+                    <li className="nav-item">
+                      <a
+                        href="#declare-victory"
+                        className={
+                          route === "declare-victory"
+                            ? "nav-link tab-link active"
+                            : `nav-link tab-link ${
+                                data.supporters.length === data.expectedVote
+                                  ? ""
+                                  : "disabled"
+                              } ${!data.completed ? "" : "disabled"}`
+                        }
+                        onClick={() => setKey("declare-victory")}
+                      >
+                        Declare victory
+                      </a>
+                    </li>
+                  </>
+                ) : null}
               </>
-            ) : null}
-               </>
-             )
-           }
+            )}
           </ul>
         </div>
       </div>

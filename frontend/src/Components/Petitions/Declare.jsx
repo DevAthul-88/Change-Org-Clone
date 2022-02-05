@@ -1,25 +1,18 @@
 import React from "react";
-import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useLocation } from "wouter";
-import {declareVictory} from '../../Redux/Single/action'
-function Declare() {
+import { declareVictory } from "../../Redux/Declare/action";
+function Declare({data}) {
   const dispatch = useDispatch();
   const [location, setLocation] = useLocation();
-  const { loading, data, error, redirect } = useSelector(
-    (state) => state.details
-  );
-  const { userInfo } = useSelector((state) => state.login);
 
-  const setDeclare = (id, userId) => {
-      dispatch(declareVictory(id , userId));
-  };
-
-  useEffect(() => {
+  const { loading, redirect, error } = useSelector((state) => state.declare);
+  const setDeclare = (id) => {
+    dispatch(declareVictory(id));
     if (redirect) {
-      setLocation();
+      setLocation(`/p/${id}`);
     }
-  }, [redirect]);
+  };
 
   return (
     <div>
@@ -35,9 +28,9 @@ function Declare() {
       <hr />
       <button
         className="btn btn-danger red-btn rubik"
-        onClick={() => setDeclare(data._id, userInfo._id)}
+        onClick={() => setDeclare(data._id)}
       >
-        <strong>{loading ? 'Loading....' : 'Declare Victory'}</strong>
+        <strong>{loading ? "Loading...." : "Declare Victory"}</strong>
       </button>
       <hr />
       <div className="alert alert-warning">
