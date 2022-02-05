@@ -117,7 +117,16 @@ module.exports = {
     try {
       const data = await petitionSchema.find();
       if (!data) return res.json({ message: "Nothing found" });
-      res.json({ data: data });
+      res.json(data);
+    } catch (error) {
+      res.json({ error: error.message });
+    }
+  },
+  popular: async (req, res) => {
+    try {
+      const data = await petitionSchema.find().sort({supporters : 1});
+      if (!data) return res.json({ message: "Nothing found" });
+      res.json(data);
     } catch (error) {
       res.json({ error: error.message });
     }
