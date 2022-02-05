@@ -7,6 +7,7 @@ import profileReducer from "./Profile/reducer";
 import detailsReducer from "./Single/reducer";
 import commentReducer from "./Comment/reducer";
 import allReducer from "./All/reducer";
+import discoverReducer from "./Discover/reducer";
 
 export default combineReducers({
   login: loginReducer,
@@ -17,4 +18,5 @@ export default combineReducers({
   details: detailsReducer,
   comment: commentReducer,
   all: allReducer,
+  discover: discoverReducer,
 });

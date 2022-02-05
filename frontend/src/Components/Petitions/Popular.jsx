@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { petitionPopular } from "../../Redux/Post/action";
+import { petitionPopular } from "../../Redux/Discover/action";
 import Post from "../Post/Post";
 import Loader from "../Loader";
 
 function Popular() {
   const dispatch = useDispatch();
-  const { loading, error, data } = useSelector((state) => state.post);
+  const { loading, error, data } = useSelector((state) => state.discover);
 
   useEffect(() => {
     dispatch(petitionPopular());

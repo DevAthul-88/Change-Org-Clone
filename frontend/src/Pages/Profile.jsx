@@ -40,9 +40,11 @@ function Profile({ id }) {
               <div className="text-center">
                 <h1 className="text-capitalize display-2 fw-bold rubik">
                   {profile.userName}
-                </h1>            
+                </h1>
                 <h5>Joined: {timeago.format(profile.createdAt)}</h5>
-                <p className="fs-5 mt-4">{profile.description ? profile.description : null}</p>
+                <p className="fs-5 mt-4">
+                  {profile.description ? profile.description : null}
+                </p>
                 <Link href={`/me/edit`}>
                   <a className="btn mt-4 btn-outline-dark">
                     <strong>Edit Profile</strong>
@@ -97,7 +99,9 @@ function Profile({ id }) {
                 {profile.userName}
               </h1>
               <h5>Joined: {timeago.format(profile.createdAt)}</h5>
-              <p className="fs-5 mt-4">{profile.description ? profile.description : null}</p>
+              <p className="fs-5 mt-4">
+                {profile.description ? profile.description : null}
+              </p>
               <hr />
             </div>
           )}

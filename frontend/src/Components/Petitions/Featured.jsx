@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { petitionFeatured } from "../../Redux/Post/action";
+import { petitionFeatured } from "../../Redux/Discover/action";
 import Post from "../Post/Post";
 import Loader from "../Loader";
 
 function Featured() {
   const dispatch = useDispatch();
-  const { loading, error, data } = useSelector((state) => state.post);
+  const { loading, error, data } = useSelector((state) => state.discover);
 
   useEffect(() => {
     dispatch(petitionFeatured());
