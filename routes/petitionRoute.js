@@ -9,4 +9,5 @@ Router.route("/getByDate").get(petitionCtrl.getPetitionByDate);
 Router.route("/:id").get(petitionCtrl.getPetitionById);
 Router.route("/comment").post(authMiddleware, petitionCtrl.addComment);
 Router.route("/removeComment").post(authMiddleware, petitionCtrl.removeComment);
+Router.route("/featured").get(petitionCtrl.featured)
 module.exports = Router;

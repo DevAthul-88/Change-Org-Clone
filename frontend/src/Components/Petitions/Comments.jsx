@@ -1,10 +1,16 @@
 import React from "react";
 import Loader from "../Loader";
 import { Link } from "wouter";
-import { useSelector } from "react-redux";
+import { removeComment } from "../../Redux/Comment/action";
+import { useSelector , useDispatch } from "react-redux";
 import * as timeago from "timeago.js";
 
 function Comments({ loading, data }) {
+  const dispatch = useDispatch();
+  const handleRemove = (id) => {
+    dispatch(removeComment(id))
+   }
+
   const { userInfo } = useSelector((state) => state.login);
   return (
     <div>
@@ -39,7 +45,7 @@ function Comments({ loading, data }) {
 
                 {e._id === userInfo._id ? (
                   <div className="card-footer">
-                    <button className="btn rubik btn-danger btn-sm">
+                    <button className="btn rubik btn-danger btn-sm" onClick={() => handleRemove(data._id)}>
                       <strong>Remove Sign</strong>
                     </button>
                   </div>

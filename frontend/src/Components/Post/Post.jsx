@@ -1,10 +1,12 @@
-import React from "react";
+import React,{useState , useEffect} from "react";
 import {Link} from 'wouter'
 import { useSelector } from "react-redux";
 import * as timeago from "timeago.js";
 
 function Post({ petitions }) {
   const { userInfo } = useSelector((state) => state.login);
+
+
   return (
     <div>
       {petitions.map((e, index) => {

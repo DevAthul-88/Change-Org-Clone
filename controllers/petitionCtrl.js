@@ -1,13 +1,13 @@
 const petitionSchema = require("../model/petitionModel");
 const mongoose = require("mongoose");
-const objectId =  mongoose.Types.ObjectId;
+const objectId = mongoose.Types.ObjectId;
 
 module.exports = {
   getSignedPetition: async (req, res) => {
     try {
       const { _id } = req.user;
-      const data = await petitionSchema.find({"supporters._id":_id})
-      res.json({data:data});
+      const data = await petitionSchema.find({ "supporters._id": _id });
+      res.json({ data: data });
     } catch (error) {
       console.log(error.error);
       res.json({ error: error.message });
@@ -96,21 +96,30 @@ module.exports = {
     }
   },
 
-  removeComment: async (req , res) => {
-    
+  removeComment: async (req, res) => {
     try {
-     
-      const {id} = req.body
-      const removed = await petitionSchema.updateOne({_id:id} , {"$pull":{supporters:{_id:req.user._id}}})
+      const { id } = req.body;
+      const removed = await petitionSchema.updateOne(
+        { _id: id },
+        { $pull: { supporters: { _id: req.user._id } } }
+      );
 
-      if(removed){
-        const pet = await petitionSchema.findById(id)
-        res.json({status:true , data:pet})
+      if (removed) {
+        const pet = await petitionSchema.findById(id);
+        res.json({ status: true, data: pet });
       }
-    
     } catch (error) {
       res.json({ error: error.message });
     }
-  }
- 
+  },
+
+  featured: async (req, res) => {
+    try {
+      const data = await petitionSchema.find();
+      if (!data) return res.json({ message: "Nothing found" });
+      res.json({ data: data });
+    } catch (error) {
+      res.json({ error: error.message });
+    }
+  },
 };
