@@ -60,3 +60,13 @@ export const petitionPopular = () => async (dispatch) => {
     dispatch({ type: PETITION_ERROR, payload: error.message });
   }
 }
+
+export const petitionRecent = () => async (dispatch) => {
+  try {
+    dispatch({ type: PETITION_REQUESTED });
+    const { data } = await axios.get("/api/petition/recent");
+    dispatch({ type: PETITION_POPULAR, payload: data });
+  } catch (error) {
+    dispatch({ type: PETITION_ERROR, payload: error.message });
+  }
+}

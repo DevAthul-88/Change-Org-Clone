@@ -23,9 +23,11 @@ const postReducer = (state = initialState, action) => {
     case PETITION_SIGNED:
       return { loading: false, data: action.payload };
     case PETITION_FEATURED:
-      return { loading: false, data: action.payload };  
-      case PETITION_POPULAR:
-        return { loading: false, data: action.payload };  
+      return { loading: false, data: action.payload };
+    case PETITION_POPULAR:
+      return { loading: false, data: action.payload };
+    case PETITION_RECENT:
+      return { loading: false, data: action.payload };
     case PETITION_ERROR:
       return { loading: false, error: action.payload };
     default:
