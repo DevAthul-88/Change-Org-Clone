@@ -16,10 +16,10 @@ function Victory() {
     <div>
       {loading ? (
         <Loader />
-      ) : data == null ? (
+      ) : !data || data === null || data == undefined ? (
         <h1 className="text-center rubik fw-bold">Nothing found</h1>
       ) : data.message ? (
-        <h1 className="display-5  fs-bold rubik">{data.message}</h1>
+        <h1 className="text-center fs-bold rubik">{data.message}</h1>
       ) : Object.values(data)[0].length < 1 ? (
         <h1 className="text-center rubik fw-bold">Nothing found</h1>
       ) : (

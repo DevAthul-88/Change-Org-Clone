@@ -7,6 +7,7 @@ module.exports = {
     try {
       const { _id } = req.user;
       const data = await petitionSchema.find({ "supporters._id": _id });
+      if (data.length < 1) return res.json({ message: "Nothing found" });
       res.json({ data: data });
     } catch (error) {
       console.log(error.error);
@@ -45,7 +46,7 @@ module.exports = {
     try {
       const user = req.user._id;
       const petition = await petitionSchema.find({ "user.id": user });
-      if (!petition) return res.json({ message: "Nothing found" });
+      if (petition.length < 1) return res.json({ message: "Nothing found" });
 
       res.json({ data: petition });
     } catch (error) {
@@ -58,7 +59,7 @@ module.exports = {
         .find()
         .sort({ createdAt: -1 })
         .limit(20);
-      if (!petition) return res.json({ message: "Nothing found" });
+      if (petition.length < 1) return res.json({ message: "Nothing found" });
       res.json({ data: petition });
     } catch (error) {
       res.json({ error: error.message });
@@ -116,7 +117,7 @@ module.exports = {
   featured: async (req, res) => {
     try {
       const data = await petitionSchema.find();
-      if (!data) return res.json({ message: "Nothing found" });
+      if (data.length < 1) return res.json({ message: "Nothing found" });
       res.json(data);
     } catch (error) {
       res.json({ error: error.message });
@@ -125,7 +126,7 @@ module.exports = {
   popular: async (req, res) => {
     try {
       const data = await petitionSchema.find().sort({supporters : 1});
-      if (!data) return res.json({ message: "Nothing found" });
+      if (data.length < 1) return res.json({ message: "Nothing found" });
       res.json(data);
     } catch (error) {
       res.json({ error: error.message });
@@ -134,7 +135,7 @@ module.exports = {
   recent: async (req, res) => {
     try {
       const data = await petitionSchema.find().sort({createdAt : 1});
-      if (!data) return res.json({ message: "Nothing found" });
+      if (data.length < 1) return res.json({ message: "Nothing found" });
       res.json(data);
     } catch (error) {
       res.json({ error: error.message });
@@ -142,8 +143,8 @@ module.exports = {
   },
   victory: async (req, res) => {
     try {
-      const data = await petitionSchema.find().sort({completed: 1});
-      if (!data) return res.json({ message: "Nothing found" });
+      const data = await petitionSchema.find({completed:true});
+      if (data.length < 1) return res.json({ message: "Nothing found" });
       res.json(data);
     } catch (error) {
       res.json({ error: error.message });
