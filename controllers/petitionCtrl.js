@@ -1,6 +1,6 @@
 const petitionSchema = require("../model/petitionModel");
 const mongoose = require("mongoose");
-const objectId = mongoose.Types.ObjectId;
+
 
 module.exports = {
   getSignedPetition: async (req, res) => {
@@ -8,7 +8,7 @@ module.exports = {
       const { _id } = req.user;
       const data = await petitionSchema.find({ "supporters._id": _id });
       if (data.length < 1) return res.json({ message: "Nothing found" });
-      res.json({ data: data });
+      res.json( data );
     } catch (error) {
       console.log(error.error);
       res.json({ error: error.message });
