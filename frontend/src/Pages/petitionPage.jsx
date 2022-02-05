@@ -82,7 +82,7 @@ function PetitionPage({ id }) {
                     className={
                       route === "edit-this-petition"
                         ? "nav-link tab-link active"
-                        : "nav-link tab-link"
+                        : `nav-link tab-link ${!data.completed ? "" : 'disabled'}`
                     }
                     onClick={() => setKey("edit-this-petition")}
                   >
@@ -96,7 +96,7 @@ function PetitionPage({ id }) {
                     className={
                       route === "declare-victory"
                         ? "nav-link tab-link active"
-                        : `nav-link tab-link ${data.supporters.length === data.expectedVote ? "" : 'disabled'}`
+                        : `nav-link tab-link ${data.supporters.length === data.expectedVote ? "" : 'disabled'} ${!data.completed ? "" : 'disabled'}`
                     }
                     onClick={() => setKey("declare-victory")}
                   >
