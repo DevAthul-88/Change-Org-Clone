@@ -1,5 +1,4 @@
 import {
-  PETITION_ALL,
   PETITION_POPULAR,
   PETITION_SIGNED,
   PETITION_RECENT,
@@ -17,8 +16,6 @@ const postReducer = (state = initialState, action) => {
     case PETITION_REQUESTED:
       return { loading: true };
     case PETITION_STARTED:
-      return { loading: false, data: action.payload };
-    case PETITION_ALL:
       return { loading: false, data: action.payload };
     case PETITION_SIGNED:
       return { loading: false, data: action.payload };

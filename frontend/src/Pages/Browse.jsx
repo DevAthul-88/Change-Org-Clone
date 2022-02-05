@@ -85,7 +85,7 @@ function Browse() {
         </div>
       </div>
       <div className="container mt-5">
-      <Main />
+        <Main />
       </div>
     </div>
   );

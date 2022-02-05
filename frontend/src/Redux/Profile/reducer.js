@@ -1,4 +1,3 @@
-
 import {
   USER_PROFILE_LOADING,
   USER_PROFILE_SUCCESS,
@@ -18,7 +17,7 @@ const userProfileReducer = (state = initialState, action) => {
       return { loading: false, error: action.payload };
 
     default:
-      return state
+      return state;
   }
 };
-export default userProfileReducer
+export default userProfileReducer;

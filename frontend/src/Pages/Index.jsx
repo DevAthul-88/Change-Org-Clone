@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { petitionByDate } from "../Redux/Post/action";
+import { useSelector, useDispatch , connect} from "react-redux";
+import { petitionByDate } from "../Redux/All/action";
 import IndexHeader from "../Components/IndexHeader";
 import Tags from "../Components/Tags";
 import Post from "../Components/Post/Post";
@@ -8,7 +8,7 @@ import Loader from "../Components/Loader";
 
 function Index() {
   const dispatch = useDispatch();
-  const { loading, error, data } = useSelector((state) => state.post);
+  const { loading, error, data } = useSelector((state) => state.all);
 
   useEffect(() => {
     dispatch(petitionByDate());
