@@ -31,7 +31,7 @@ function Comments({ loading, data }) {
                 <div className="card-body">
                   <h5 className="card-title rubik">
                     <Link
-                      href={`/profile/${e._id}`}
+                      href={`/profile/${e.id}`}
                       className="text-dark text-decoration-none"
                     >
                       {e.user}
@@ -43,7 +43,7 @@ function Comments({ loading, data }) {
                   <p> {e.message}</p>
                 </div>
 
-                {e._id === userInfo._id ? (
+                {e.id === userInfo._id ? (
                   <div className="card-footer">
                     <button className="btn rubik btn-danger btn-sm" onClick={() => handleRemove(data._id)}>
                       <strong>Remove Sign</strong>
