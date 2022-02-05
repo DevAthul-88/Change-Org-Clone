@@ -28,6 +28,8 @@ const postReducer = (state = initialState, action) => {
       return { loading: false, data: action.payload };
     case PETITION_RECENT:
       return { loading: false, data: action.payload };
+    case PETITION_VICTORY:
+      return { loading: false, data: action.payload };
     case PETITION_ERROR:
       return { loading: false, error: action.payload };
     default:

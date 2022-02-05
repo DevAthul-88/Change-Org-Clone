@@ -34,7 +34,7 @@ export const petitionByDate = () => async (dispatch) => {
 export const petitionSigned = () => async (dispatch) => {
   try {
     dispatch({ type: PETITION_REQUESTED });
-    const { data } = await axios.get("/api/petition/getSigned",  config);
+    const { data } = await axios.get("/api/petition/getSigned", config);
     dispatch({ type: PETITION_SIGNED, payload: data });
   } catch (error) {
     dispatch({ type: PETITION_ERROR, payload: error.message });
@@ -49,7 +49,7 @@ export const petitionFeatured = () => async (dispatch) => {
   } catch (error) {
     dispatch({ type: PETITION_ERROR, payload: error.message });
   }
-}
+};
 
 export const petitionPopular = () => async (dispatch) => {
   try {
@@ -59,7 +59,7 @@ export const petitionPopular = () => async (dispatch) => {
   } catch (error) {
     dispatch({ type: PETITION_ERROR, payload: error.message });
   }
-}
+};
 
 export const petitionRecent = () => async (dispatch) => {
   try {
@@ -69,4 +69,14 @@ export const petitionRecent = () => async (dispatch) => {
   } catch (error) {
     dispatch({ type: PETITION_ERROR, payload: error.message });
   }
-}
+};
+
+export const petitionVictory = () => async (dispatch) => {
+  try {
+    dispatch({ type: PETITION_REQUESTED });
+    const { data } = await axios.get("/api/petition/victory");
+    dispatch({ type: PETITION_VICTORY, payload: data });
+  } catch (error) {
+    dispatch({ type: PETITION_ERROR, payload: error.message });
+  }
+};
