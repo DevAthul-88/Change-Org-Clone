@@ -1,14 +1,14 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useLocation } from "wouter";
-import { declareVictory } from "../../Redux/Declare/action";
+import { declareAction } from "../../Redux/Declare/action";
 function Declare({data}) {
   const dispatch = useDispatch();
   const [location, setLocation] = useLocation();
 
   const { loading, redirect, error } = useSelector((state) => state.declare);
   const setDeclare = (id) => {
-    dispatch(declareVictory(id));
+    dispatch(declareAction(id));
     if (redirect) {
       setLocation(`/p/${id}`);
     }
