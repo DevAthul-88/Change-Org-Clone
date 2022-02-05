@@ -22,8 +22,8 @@ function Details({ data, loading, userInfo }) {
   }, [data]);
 
   const handleRemove = (id) => {
-   dispatch(removeComment(id))
-  }
+    dispatch(removeComment(id));
+  };
 
   const [message, setMessage] = useState("");
 
@@ -156,7 +156,10 @@ function Details({ data, loading, userInfo }) {
                                 </div>
                                 <div className="card footer">
                                   <button className="btn btn-danger btn-sm">
-                                    <strong className="rubik" onClick={() => handleRemove(data._id)}>
+                                    <strong
+                                      className="rubik"
+                                      onClick={() => handleRemove(data._id)}
+                                    >
                                       Remove Sign
                                     </strong>
                                   </button>
