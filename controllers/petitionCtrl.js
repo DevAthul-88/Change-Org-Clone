@@ -177,35 +177,37 @@ module.exports = {
   },
   declareVictory: async (req, res) => {
     try {
-       await petitionSchema.updateOne({_id:objectId(req.body.id) , 'user.id':req.user._id} , {
-        $set:{completed:true}
-      })
-      const pet = await petitionSchema.findById(req.body.id)
-      res.json({status: true , data:pet})
+      await petitionSchema.updateOne(
+        { _id: objectId(req.body.id), "user.id": req.user._id },
+        {
+          $set: { completed: true },
+        }
+      );
+      const pet = await petitionSchema.findById(req.body.id);
+      res.json({ status: true, data: pet });
     } catch (error) {
       console.log(error);
       res.json({ error: error.message });
     }
   },
-  getCategory: async (req , res) => {
+  getCategory: async (req, res) => {
     try {
-      const {id} = req.params
-      const data = await petitionSchema.find({category:id})
-      if(data.length < 1) return res.json({message: "Nothing found"})
-      res.json({data:data})
+      const { id } = req.params;
+      const data = await petitionSchema.find({ category: id });
+      if (data.length < 1) return res.json({ message: "Nothing found" });
+      res.json({ data: data });
     } catch (error) {
       res.json({ error: error.message });
     }
   },
   supporters: async (req, res) => {
     try {
-      const {id} = req.params;
-
-      const data = await petitionSchema.findById(id)
-      console.log(data[0].supporters);
-
+      const data = await petitionSchema.findOne({
+        _id: objectId(req.params.id),
+      });
+      res.json({ data: data.supporters , name:data.title });
     } catch (error) {
       res.json({ error: error.message });
     }
-  }
+  },
 };

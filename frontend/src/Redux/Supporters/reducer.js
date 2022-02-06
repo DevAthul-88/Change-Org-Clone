@@ -7,7 +7,7 @@ const supporterReducer = (state = initialState, action) => {
     case SUPPORTER_REQUEST:
       return { loading: true };
     case SUPPORTER_SUCCESS:
-      return { loading: false, data: action.payload };
+      return { loading: false, data: action.payload , name: action.name};
     case SUPPORTER_ERROR:
       return { loading: false, error: action.payload };
     default: return state;  

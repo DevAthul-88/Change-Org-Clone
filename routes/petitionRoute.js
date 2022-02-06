@@ -16,5 +16,5 @@ Router.route("/:id").get(petitionCtrl.getPetitionById);
 Router.route("/edit").patch(authMiddleware, petitionCtrl.editPetition);
 Router.route("/comment").post(authMiddleware, petitionCtrl.addComment);
 Router.route("/removeComment").post(authMiddleware, petitionCtrl.removeComment);
-
+Router.route("/supporters/:id").get(petitionCtrl.supporters);
 module.exports = Router;
