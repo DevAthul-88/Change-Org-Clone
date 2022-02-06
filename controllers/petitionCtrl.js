@@ -178,7 +178,7 @@ module.exports = {
   declareVictory: async (req, res) => {
     try {
        await petitionSchema.updateOne({_id:objectId(req.body.id) , 'user.id':req.user._id} , {
-        $set:{completed:false}
+        $set:{completed:true}
       })
       const pet = await petitionSchema.findById(req.body.id)
       res.json({status: true , data:pet})

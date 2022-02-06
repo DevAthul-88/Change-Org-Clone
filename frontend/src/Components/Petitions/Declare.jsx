@@ -10,7 +10,7 @@ function Declare({data}) {
   const setDeclare = (id) => {
     dispatch(declareAction(id));
     if (redirect) {
-      setLocation(`/p/${id}`);
+      setLocation(`/p/61fe1f4a499e875c3b275753#details`)
     }
   };
 

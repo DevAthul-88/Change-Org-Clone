@@ -14,6 +14,7 @@ export const declareAction = (petitionId) => async (dispatch) => {
 
     if (data.status) {
       dispatch({ type: DECLARE_SUCCESS, redirect: data.status });
+      dispatch({type:DETAILS_SUCCESS,  payload : data.data });
     }
   } catch (error) {
     dispatch({ type: DECLARE_ERROR, payload: error.message });
