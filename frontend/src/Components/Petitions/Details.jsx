@@ -5,6 +5,7 @@ import { commentAction, removeComment } from "../../Redux/Comment/action";
 import * as timeago from "timeago.js";
 import Loader from "../Loader";
 import { useState } from "react";
+import cat from '../../data/category'
 
 function Details({ data, loading, userInfo }) {
   const { loader, messages, errors } = useSelector((state) => state.comment);
@@ -44,6 +45,11 @@ function Details({ data, loading, userInfo }) {
     };
     dispatch(commentAction(messageObj));
   };
+
+  const filter = (id) => {
+    const name = cat.filter((e) => e.key === id);
+    return name[0].name
+  }
 
   return (
     <div>
@@ -85,8 +91,8 @@ function Details({ data, loading, userInfo }) {
                   <div>
                     <h6>
                       Category:{" "}
-                      <Link href="#" className="redColor text-capitalize">
-                        {data.category}
+                      <Link href={`/category/${data.category}`} className="redColor text-capitalize">
+                        {filter(data.category)}
                       </Link>
                     </h6>
                   </div>
