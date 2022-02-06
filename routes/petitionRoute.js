@@ -8,6 +8,7 @@ Router.route("/popular").get(petitionCtrl.popular);
 Router.route("/recent").get(petitionCtrl.recent);
 Router.route("/victory").get(petitionCtrl.victory);
 Router.route("/getByDate").get(petitionCtrl.getPetitionByDate);
+Router.route("/category/:id").get(petitionCtrl.getCategory);
 Router.route("/declare").patch(authMiddleware, petitionCtrl.declareVictory);
 Router.route("/create").post(authMiddleware, petitionCtrl.create);
 Router.route("/getByUser").get(authMiddleware, petitionCtrl.getPetitionByUser);

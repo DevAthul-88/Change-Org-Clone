@@ -186,5 +186,15 @@ module.exports = {
       console.log(error);
       res.json({ error: error.message });
     }
+  },
+  getCategory: async (req , res) => {
+    try {
+      const {id} = req.params
+      const data = await petitionSchema.find({category:id})
+      if(data.length < 1) return res.json({message: "Nothing found"})
+      res.json({data:data})
+    } catch (error) {
+      res.json({ error: error.message });
+    }
   }
 };
