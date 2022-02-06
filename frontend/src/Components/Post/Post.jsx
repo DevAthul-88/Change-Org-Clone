@@ -65,7 +65,7 @@ function Post({ petitions }) {
                 {e.supporters.length}{" "}
                 <span className="redColor">
                   <Link
-                    href={`/s/supporters/${e._id}`}
+                    href={`/supporters/${e._id}`}
                     className="text-decoration-none redColor"
                   >
                     Supporters

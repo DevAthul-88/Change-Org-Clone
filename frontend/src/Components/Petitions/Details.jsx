@@ -53,7 +53,7 @@ function Details({ data, loading, userInfo }) {
 
   return (
     <div>
-      {data == null || data == undefined ? (
+      {data == null || data == undefined  ? (
         <h1>Nothing found</h1>
       ) : (
         <div>

@@ -196,5 +196,16 @@ module.exports = {
     } catch (error) {
       res.json({ error: error.message });
     }
+  },
+  supporters: async (req, res) => {
+    try {
+      const {id} = req.params;
+
+      const data = await petitionSchema.findById(id)
+      console.log(data[0].supporters);
+
+    } catch (error) {
+      res.json({ error: error.message });
+    }
   }
 };
