@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "wouter";
+import { Link , useLocation } from "wouter";
 import { useSelector, useDispatch } from "react-redux";
 import profileAction from "../Redux/Profile/action";
 import Signed from "../Components/Petitions/Signed";
@@ -8,6 +8,7 @@ import Loading from "../Components/Loader";
 import * as timeago from "timeago.js";
 
 function Profile({ id }) {
+  const [location, setLocation] = useLocation()
   const dispatch = useDispatch();
   const { userInfo } = useSelector((state) => state.login);
   const { loading, profile } = useSelector((state) => state.profile);
@@ -15,6 +16,9 @@ function Profile({ id }) {
 
   useEffect(() => {
     dispatch(profileAction(id));
+    if(userInfo == null || Object.keys(userInfo).length == 0) {
+      setLocation(`/UnAuthorized`)
+    }
   }, []);
 
   function setKey(key) {

@@ -13,7 +13,7 @@ function PetitionForm({ id }) {
   return (
     <div className="container mt-5">
         {status ? (
-        <div className="alert alert-success" role="alert">
+        <div className="alert alert-success alert-dismissible fade show" role="alert">
           Petition created successfully!
         </div>
       ) : null}

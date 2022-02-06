@@ -11,6 +11,7 @@ import UpdateProfile from "../../Pages/UpdateProfile";
 import PetitionPage from "../../Pages/petitionPage";
 import Supporters from "../../Pages/Supporters";
 import NotFound from "../../Pages/NotFound";
+import UnAuth from '../../Pages/UnAuth'
 
 function Home() {
   return (
@@ -36,6 +37,7 @@ function Home() {
         <Route path="/supporters/:id">
           {(params) => <Supporters id={params.id} />}
         </Route>
+        <Route path="/UnAuthorized" component={UnAuth}/>
         <Route path='/:rest*' component={NotFound} />
       </Switch>
     </div>

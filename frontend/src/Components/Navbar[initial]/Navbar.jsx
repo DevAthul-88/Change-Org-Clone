@@ -21,9 +21,6 @@ function Navbar() {
          </Link>
         </li>
         <li className="nav-item">
-          <a className="nav-link" href="#">My petitions</a>
-        </li>
-        <li className="nav-item">
           <Link href="/petitions">
           <a className="nav-link">Browse</a>
           </Link>
