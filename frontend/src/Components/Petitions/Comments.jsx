@@ -43,27 +43,31 @@ function Comments({ loading, data }) {
                   <p> {e.message}</p>
                 </div>
 
-                {data.user.id == userInfo._id ? null : (
-                  <div>
-                    {e._id === userInfo._id ? (
-                      <div className="card-footer">
-                        {data.completed ? (
-                          <button
-                            className="btn rubik btn-danger btn-sm disabled"
-                          >
-                            <strong>You can't remove sign after declaring victory</strong>
-                          </button>
-                        ) : (
-                          <button
-                            className="btn rubik btn-danger btn-sm"
-                            onClick={() => handleRemove(data._id)}
-                          >
-                            <strong>Remove Sign</strong>
-                          </button>
-                        )}
+                {userInfo == undefined ? null : (
+                  <>
+                    {data.user.id == userInfo._id ? null : (
+                      <div>
+                        {e.id === userInfo._id ? (
+                          <div className="card-footer">
+                            {data.completed ? (
+                              <button className="btn rubik btn-danger btn-sm disabled">
+                                <strong>
+                                  You can't remove sign after declaring victory
+                                </strong>
+                              </button>
+                            ) : (
+                              <button
+                                className="btn rubik btn-danger btn-sm"
+                                onClick={() => handleRemove(data._id)}
+                              >
+                                <strong>Remove Sign</strong>
+                              </button>
+                            )}
+                          </div>
+                        ) : null}
                       </div>
-                    ) : null}
-                  </div>
+                    )}
+                  </>
                 )}
               </div>
             );

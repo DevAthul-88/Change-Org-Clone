@@ -2,15 +2,15 @@ import React, { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { useSelector } from "react-redux";
 import * as timeago from "timeago.js";
-import data from '../../data/category'
+import data from "../../data/category";
 
 function Post({ petitions }) {
-  const { userInfo } = useSelector((state) => state.login);
+  const { userInfo, error } = useSelector((state) => state.login);
 
   const filter = (id) => {
-    const name = data.filter((e) => e.key == id)
-    return name[0].name
-  }
+    const name = data.filter((e) => e.key == id);
+    return name[0].name;
+  };
 
   return (
     <div>
@@ -41,20 +41,34 @@ function Post({ petitions }) {
                 </h5>
 
                 <div className="d-grid">
-                  {e.supporters.some((e) => e.id == userInfo._id) ? (
-                    <a className="btn btn-danger btn_red btn-block disabled">
-                      <strong>Voted</strong>
-                    </a>
-                  ) : (
-                    <>
+                  { error || Object.keys(userInfo).length == 0 ? (
+                  <>
                       {e.supporters.length !== e.expectedVote ? (
                         <Link href={`/p/${e._id}`}>
-                          <a className="btn btn-danger btn_red">
+                          <a className="btn btn-danger btn-block  btn_red" style={{width:"100%"}}>
                             <strong>Sign this petition</strong>
                           </a>
                         </Link>
                       ) : null}
                     </>
+                  ) : (
+                    <div>
+                    {e.supporters.some((e) => e.id == userInfo._id) ? (
+                      <a className="btn btn-danger btn_red btn-block disabled" style={{width:"100%"}}>
+                        <strong>Voted</strong>
+                      </a>
+                    ) : (
+                      <>
+                        {e.supporters.length !== e.expectedVote ? (
+                          <Link href={`/p/${e._id}`}>
+                            <a className="btn btn-danger btn_red btn-block" style={{width:"100%"}}>
+                              <strong>Sign this petition</strong>
+                            </a>
+                          </Link>
+                        ) : null}
+                      </>
+                    )}
+                  </div>
                   )}
                 </div>
               </div>
@@ -90,11 +104,9 @@ function Post({ petitions }) {
                 <span>
                   <i className="fa fa-folder" aria-hidden="true"></i> Category:{" "}
                 </span>
-               <Link href={`/category/${e.category}`}>
-               <a  className="redColor">
-                {filter(e.category)}
-                </a>
-               </Link>
+                <Link href={`/category/${e.category}`}>
+                  <a className="redColor">{filter(e.category)}</a>
+                </Link>
               </h5>
             </div>
           </div>

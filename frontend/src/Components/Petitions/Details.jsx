@@ -15,7 +15,7 @@ function Details({ data, loading, userInfo }) {
   const [comment, setComment] = useState("");
 
   useEffect(() => {
-    if (data) {
+    if (data && userInfo) {
       const checkExists = data.supporters.some((e) => e._id == userInfo._id);
       setExists(checkExists);
       const commentAdd = data.supporters.filter((e) => e._id == userInfo._id);
@@ -149,7 +149,9 @@ function Details({ data, loading, userInfo }) {
                         ) : null}
                       </div>
                     ) : (
-                      <div>
+                     <>
+                     {userInfo == undefined ? null : (
+                        <div>
                         {Object.keys(userInfo).length !== 0 ? (
                           <div>
                             {!exists ? (
@@ -220,6 +222,8 @@ function Details({ data, loading, userInfo }) {
                           </div>
                         ) : null}
                       </div>
+                     )}
+                     </>
                     )}
                   </div>
                 </div>
