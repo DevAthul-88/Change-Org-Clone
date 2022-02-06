@@ -11,6 +11,7 @@ import discoverReducer from "./Discover/reducer";
 import editPetitionReducer from "./EditPetition/reducer";
 import signedPetitionReducer from "./Signed/reducer";
 import declareReducer from "./Declare/reducer";
+import categoryReducer from "./Category/reducer"
 
 export default combineReducers({
   login: loginReducer,
@@ -25,4 +26,5 @@ export default combineReducers({
   discover: discoverReducer,
   editPetition: editPetitionReducer,
   signed: signedPetitionReducer,
+  category: categoryReducer,
 });
