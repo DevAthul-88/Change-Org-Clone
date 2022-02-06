@@ -5,7 +5,7 @@ import { commentAction, removeComment } from "../../Redux/Comment/action";
 import * as timeago from "timeago.js";
 import Loader from "../Loader";
 import { useState } from "react";
-import cat from '../../data/category'
+import cat from "../../data/category";
 
 function Details({ data, loading, userInfo }) {
   const { loader, messages, errors } = useSelector((state) => state.comment);
@@ -48,12 +48,13 @@ function Details({ data, loading, userInfo }) {
 
   const filter = (id) => {
     const name = cat.filter((e) => e.key === id);
-    return name[0].name
-  }
+    return name[0].name;
+  };
 
   return (
     <div>
-      {data == null || data == undefined  ? (
+    
+      {data == null || data == undefined ? (
         <h1>Nothing found</h1>
       ) : (
         <div>
@@ -69,6 +70,16 @@ function Details({ data, loading, userInfo }) {
               ) : null}
 
               <div className=" col-8">
+              {data.completed ? (
+        <div className="alert alert-success">
+          <div className="alert-heading fs-5">
+            Well done!
+            </div>
+            <p className="mt-2 fs-5">
+            Author of this petition has declared this petition was victorious
+          </p>
+        </div>
+      ) : null}
                 <h1 className="rubik display-5 fw-bold mb-2">{data.title}</h1>
 
                 <div className="d-flex justify-content-between">
@@ -91,7 +102,10 @@ function Details({ data, loading, userInfo }) {
                   <div>
                     <h6>
                       Category:{" "}
-                      <Link href={`/category/${data.category}`} className="redColor text-capitalize">
+                      <Link
+                        href={`/category/${data.category}`}
+                        className="redColor text-capitalize"
+                      >
                         {filter(data.category)}
                       </Link>
                     </h6>
@@ -121,18 +135,20 @@ function Details({ data, loading, userInfo }) {
                   <div className="mt-4">
                     {check ? (
                       <div>
-                       {data.completed ? (
+                        {data.completed ? (
                           <div className="alert alert-success" role="alert">
-                          <h4 className="alert-heading">Well done!</h4>
-                          <p>
-                          This petition made change with {data.supporters.length} supporters!
-                          </p>
-                          <hr />
-                          <p className="mb-0">
-                           Author of this petition has declared this petition was victorious
-                          </p>
-                        </div>
-                       ):null}
+                            <h4 className="alert-heading">Well done!</h4>
+                            <p>
+                              This petition made change with{" "}
+                              {data.supporters.length} supporters!
+                            </p>
+                            <hr />
+                            <p className="mb-0">
+                              Author of this petition has declared this petition
+                              was victorious
+                            </p>
+                          </div>
+                        ) : null}
                       </div>
                     ) : (
                       <div>

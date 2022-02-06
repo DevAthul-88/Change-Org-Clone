@@ -7,7 +7,7 @@ module.exports = {
     try {
       const { _id } = req.user;
       const data = await petitionSchema.find({
-        "supporters.id": objectId(_id),
+        "supporters.id":_id+"",
       });
       if (data.length < 1) return res.json({ message: "Nothing found" });
       res.json(data);
@@ -47,9 +47,8 @@ module.exports = {
   getPetitionByUser: async (req, res) => {
     try {
       const user = req.user._id;
-      const data = await petitionSchema.find({ "user.id": user });
+      const data = await petitionSchema.find({ "user.id": user+"" });
       if (data.length < 1) return res.json({ message: "Nothing found" });
-
       res.json(data);
     } catch (error) {
       res.json({ error: error.message });

@@ -11,8 +11,6 @@ function Started() {
 
   useEffect(() => {
     dispatch(petitionStarted());
-
-   
   }, []);
 
   return (

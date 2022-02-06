@@ -11,9 +11,7 @@ export const petitionStarted = () => async (dispatch) => {
     dispatch({ type: PETITION_STARTED_REQUESTED });
     const { data } = await axios.get("/api/petition/getByUser", config);
     dispatch({ type: PETITION_STARTED_STARTED, payload: data });
-    console.log(data);
   } catch (error) {
-    console.log(error);
     dispatch({ type: PETITION_STARTED_ERROR, payload: error.message });
   }
 };

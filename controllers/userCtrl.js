@@ -120,6 +120,15 @@ const userCtrl = {
     } catch (error) {
       res.json({error: error.message})
     }
+  },
+
+  userCount: async (req, res) => {
+    try {
+      const data = await userSchema.find().count()
+      res.json({count:data})
+    } catch (error) {
+      res.json({error: error.message })
+    }
   }
 };
 

@@ -70,7 +70,7 @@ function Profile({ id }) {
                         }
                         onClick={() => setKey("started")}
                       >
-                        Started(0)
+                        Started
                       </a>
                     </li>
                     <li className="nav-item">
@@ -83,7 +83,7 @@ function Profile({ id }) {
                         }
                         onClick={() => setKey("signed")}
                       >
-                        Signed(0)
+                        Signed
                       </a>
                     </li>
                   </ul>
