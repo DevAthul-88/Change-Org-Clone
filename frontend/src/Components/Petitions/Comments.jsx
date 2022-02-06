@@ -47,12 +47,20 @@ function Comments({ loading, data }) {
                   <div>
                     {e._id === userInfo._id ? (
                       <div className="card-footer">
-                        <button
-                          className="btn rubik btn-danger btn-sm"
-                          onClick={() => handleRemove(data._id)}
-                        >
-                          <strong>Remove Sign</strong>
-                        </button>
+                        {data.completed ? (
+                          <button
+                            className="btn rubik btn-danger btn-sm disabled"
+                          >
+                            <strong>You can't remove sign after declaring victory</strong>
+                          </button>
+                        ) : (
+                          <button
+                            className="btn rubik btn-danger btn-sm"
+                            onClick={() => handleRemove(data._id)}
+                          >
+                            <strong>Remove Sign</strong>
+                          </button>
+                        )}
                       </div>
                     ) : null}
                   </div>

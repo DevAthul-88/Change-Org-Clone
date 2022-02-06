@@ -53,7 +53,6 @@ function Details({ data, loading, userInfo }) {
 
   return (
     <div>
-    
       {data == null || data == undefined ? (
         <h1>Nothing found</h1>
       ) : (
@@ -70,16 +69,15 @@ function Details({ data, loading, userInfo }) {
               ) : null}
 
               <div className=" col-8">
-              {data.completed ? (
-        <div className="alert alert-success">
-          <div className="alert-heading fs-5">
-            Well done!
-            </div>
-            <p className="mt-2 fs-5">
-            Author of this petition has declared this petition was victorious
-          </p>
-        </div>
-      ) : null}
+                {data.completed ? (
+                  <div className="alert alert-success">
+                    <div className="alert-heading fs-5">Well done!</div>
+                    <p className="mt-2 fs-5">
+                      Author of this petition has declared this petition was
+                      victorious
+                    </p>
+                  </div>
+                ) : null}
                 <h1 className="rubik display-5 fw-bold mb-2">{data.title}</h1>
 
                 <div className="d-flex justify-content-between">
@@ -198,13 +196,19 @@ function Details({ data, loading, userInfo }) {
                                       <p>{comment.message}</p>
                                     </div>
                                     <div className="card footer">
-                                      <button className="btn btn-danger btn-sm">
-                                        <strong
-                                          className="rubik"
-                                          onClick={() => handleRemove(data._id)}
-                                        >
-                                          Remove Sign
-                                        </strong>
+                                      <button className={`btn btn-danger btn-sm ${data.completed ? 'disabled' : ''}`}>
+                                        {data.completed ? (
+                                          <strong>You can't remove sign after declaring victory</strong>
+                                        ) : (
+                                          <strong
+                                            className="rubik"
+                                            onClick={() =>
+                                              handleRemove(data._id)
+                                            }
+                                          >
+                                            Remove Sign
+                                          </strong>
+                                        )}
                                       </button>
                                     </div>
                                   </div>
