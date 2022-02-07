@@ -60,8 +60,6 @@ function Login() {
                       className={`form-control ${
                         errors.email ? "border-danger" : null
                       }`}
-                      id="exampleInputEmail1"
-                      aria-describedby="emailHelp"
                     />
                     <div className="form-label text-danger">
                       {errors.email && touched.email && errors.email}
@@ -78,8 +76,6 @@ function Login() {
                       className={`form-control ${
                         errors.password && "border-danger"
                       }`}
-                      id="exampleInputEmail1"
-                      aria-describedby="emailHelp"
                     />
                     <div className="form-label text-danger">
                       {errors.password && touched.password && errors.password}

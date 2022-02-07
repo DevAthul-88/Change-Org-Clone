@@ -1,7 +1,14 @@
 import React from "react";
 import {Link} from 'wouter'
+import { Formik } from "formik";
+import RegisterSchema from "../Schema/Register";
+import { useDispatch, useSelector } from "react-redux";
+import {registerAction} from "../Redux/Register/action";
+import { useEffect } from "react";
 
 function SignUp() {
+  const state = useSelector((state) => state.register);
+  const dispatch = useDispatch();
   return (
     <div className="container mt-5">
       <div className="row ">
@@ -9,42 +16,88 @@ function SignUp() {
           <h1 className="mb-4 rubik">SignUp</h1>
 
           <div className="form">
-            <form>
+   
 
-            <div className="mb-3">
-                <label className="form-label">Username</label>
-                <input
-                  type="email"
-                  className="form-control"
-                  id="exampleInputEmail1"
-                  aria-describedby="emailHelp"
-                />
-              </div>
+            <Formik
+              initialValues={{ email: "", password: "" , userName:""}}
+              validationSchema={RegisterSchema}
+              onSubmit={(values, { setSubmitting }) => {
+               console.log(values);
+               
+              }}
+            >
+              {({
+                values,
+                errors,
+                touched,
+                handleChange,
+                handleBlur,
+                handleSubmit,
+                isSubmitting,
+              }) => (
+                <form onSubmit={handleSubmit}>
 
-              <div className="mb-3">
-                <label className="form-label">Email address</label>
-                <input
-                  type="email"
-                  className="form-control"
-                  id="exampleInputEmail1"
-                  aria-describedby="emailHelp"
-                />
-              </div>
+                  <div className="mb-3">
+                    <label className="form-label">Username</label>
+                    <input
+                      type="text"
+                      name="userName"
+                      value={values.userName}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      className={`form-control ${
+                        errors.userName ? "border-danger" : null
+                      }`}
+                    />
+                    <div className="form-label text-danger">
+                      {errors.userName && touched.userName && errors.userName}
+                    </div>
+                  </div>
 
-              <div className="mb-3">
-                <label className="form-label">Password</label>
-                <input
-                  type="password"
-                  className="form-control"
-                  id="exampleInputEmail1"
-                  aria-describedby="emailHelp"
-                />
-              </div>
+                  <div className="mb-3">
+                    <label className="form-label">Email address</label>
+                    <input
+                      type="email"
+                      name="email"
+                      value={values.email}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      className={`form-control ${
+                        errors.email ? "border-danger" : null
+                      }`}
+                    />
+                    <div className="form-label text-danger">
+                      {errors.email && touched.email && errors.email}
+                    </div>
+                  </div>
 
-              <button className="btn btn-danger btn_red">
-                <strong>Login</strong>
-              </button>
-            </form>
+                  <div className="mb-3">
+                    <label className="form-label">Password</label>
+                    <input
+                      type="password"
+                      name="password"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      className={`form-control ${
+                        errors.password && "border-danger"
+                      }`}
+                    />
+                    <div className="form-label text-danger">
+                      {errors.password && touched.password && errors.password}
+                    </div>
+                  </div>
+
+                  <button
+                    type="submit"
+                    className="btn btn-danger btn_red"
+                    disabled={state.error ? false : isSubmitting}
+                  >
+                    <strong>{state.loading ? "Loading..." : "Login"}</strong>
+                  </button>
+                </form>
+              )}
+            </Formik>
+            
 
            <Link href="/login">
            <a  className="redColor mt-3 d-block">

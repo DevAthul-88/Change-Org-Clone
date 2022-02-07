@@ -13,6 +13,7 @@ import signedPetitionReducer from "./Signed/reducer";
 import declareReducer from "./Declare/reducer";
 import categoryReducer from "./Category/reducer";
 import supporterReducer from './Supporters/reducer';
+import registerReducer from './Register/reducer';
 
 export default combineReducers({
   login: loginReducer,
@@ -29,4 +30,5 @@ export default combineReducers({
   signed: signedPetitionReducer,
   category: categoryReducer,
   supporters: supporterReducer,
+  register:registerReducer,
 });
