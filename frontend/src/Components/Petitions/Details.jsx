@@ -16,9 +16,9 @@ function Details({ data, loading, userInfo }) {
 
   useEffect(() => {
     if (data && userInfo) {
-      const checkExists = data.supporters.some((e) => e._id == userInfo._id);
+      const checkExists = data.supporters.some((e) => e.id == userInfo._id);
       setExists(checkExists);
-      const commentAdd = data.supporters.filter((e) => e._id == userInfo._id);
+      const commentAdd = data.supporters.filter((e) => e.id == userInfo._id);
       setComment(commentAdd[0]);
       if (data.user.id == userInfo._id) {
         setCheck(true);

@@ -7,7 +7,7 @@ module.exports = {
     try {
       const { _id } = req.user;
       const data = await petitionSchema.find({
-        "supporters.id":_id+"",
+        "supporters.id":_id,
       });
       if (data.length < 1) return res.json({ message: "Nothing found" });
       res.json(data);
@@ -83,8 +83,9 @@ module.exports = {
 
       const comment = {
         user: userName,
-        _id: _id,
+        id: _id,
         message: message,
+        createdAt: Date.now()
       };
 
       await petitionSchema.updateOne(
@@ -103,7 +104,7 @@ module.exports = {
       const { id } = req.body;
       const removed = await petitionSchema.updateOne(
         { _id: id },
-        { $pull: { supporters: { _id: req.user._id } } }
+        { $pull: { supporters: { id: req.user._id } } }
       );
 
       if (removed) {
