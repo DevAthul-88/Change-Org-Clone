@@ -7,7 +7,7 @@ import {loginAction} from "../Redux/Login/action";
 import { useEffect } from "react";
 
 function Login() {
-
+  window.document.title = "Change - Login"
   const state = useSelector((state) => state.login);
   const dispatch = useDispatch();
 

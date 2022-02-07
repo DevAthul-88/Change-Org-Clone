@@ -6,6 +6,7 @@ import petitionCreateAction from '../Redux/Petition/action'
 
 
 function PetitionForm({ id }) {
+  window.document.title = "Change - New petition"
   const dispatch = useDispatch();
   const {loading , error , status} = useSelector((state) => state.create)
   

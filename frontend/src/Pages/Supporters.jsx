@@ -5,6 +5,7 @@ import Loader from "../Components/Loader";
 import {Link} from 'wouter'
 
 function Supporters({ id }) {
+  window.document.title = "Change - Supporters"
   const dispatch = useDispatch();
   const { loading, data, name } = useSelector((state) => state.supporters);
   useEffect(() => {

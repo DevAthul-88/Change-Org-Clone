@@ -4,6 +4,7 @@ import categories from "../data/category";
 import { useLocation } from "wouter";
 
 function StartPetition() {
+  window.document.title = "Change - Start"
   const [location, setLocation] = useLocation();
   const [key, setKey] = useState("");
 

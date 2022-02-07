@@ -10,7 +10,7 @@ import Nothing from '../image/nothing.png'
 function Category({ id }) {
   const dispatch = useDispatch();
   const { loading, data, error } = useSelector((state) => state.category);
-
+  window.document.title = "Change - Category"
   const name = datas.filter((e) => e.key == id);
   useEffect(() => {
     dispatch(categoryAction(id));

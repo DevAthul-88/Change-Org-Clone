@@ -15,7 +15,8 @@ function Navbar() {
     dispatch(logOutAction())
     window.location.href = "/login"
   }
-
+  const [isNavCollapsed, setIsNavCollapsed] = useState(true);
+  const handleNavCollapse = () => setIsNavCollapsed(!isNavCollapsed);
   return <nav className="navbar navbar-expand-lg navbar-light bg-light">
   <div className="container">
     <Link href="/">
@@ -23,10 +24,10 @@ function Navbar() {
       <strong>Change.Org</strong>
     </a>
     </Link>
-    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <button className="navbar-toggler" data-toggle="collapse" data-target="#navbarsExample09" aria-controls="navbarsExample09" aria-expanded={!isNavCollapsed ? true : false} aria-label="Toggle navigation" onClick={handleNavCollapse}>
       <span className="navbar-toggler-icon"></span>
     </button>
-    <div className="collapse navbar-collapse" id="navbarNav">
+    <div class={`${isNavCollapsed ? 'collapse' : ''} navbar-collapse`} id="navbarNav">
       <ul className="navbar-nav">
         <li className="nav-item">
          <Link href="/start-a-petition">

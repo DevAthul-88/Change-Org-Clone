@@ -5,6 +5,7 @@ import EditSchema from "../Schema/Edit";
 import EditProfileAction from "../Redux/EditProfile/action";
 
 function UpdateProfile() {
+  window.document.title = "Change - Update"
   const { userInfo } = useSelector((state) => state.login);
   const { loading, status, error } = useSelector((state) => state.editProfile);
 

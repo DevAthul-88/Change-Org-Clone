@@ -5,6 +5,7 @@ import Recent from "../Components/Petitions/Recent";
 import Victorys from "../Components/Petitions/Victorys";
 
 function Browse() {
+  window.document.title = "Change - Browse"
   const [route, setRoute] = useState("featured");
 
   function setKey(key) {

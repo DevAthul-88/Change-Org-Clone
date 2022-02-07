@@ -6,18 +6,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { registerAction } from "../Redux/Register/action";
 import { useEffect } from "react";
 
-
-
 function SignUp() {
+  window.document.title = "Change - SignUp";
   const state = useSelector((state) => state.register);
   const dispatch = useDispatch();
 
-
-
-  if(state.status){
-   window.location.href = "/login"
+  if (state.status) {
+    window.location.href = "/login";
   }
-  
 
   return (
     <div className="container mt-5">
@@ -32,7 +28,12 @@ function SignUp() {
 
           <div className="form">
             <Formik
-              initialValues={{ email: "", password: "", userName: "" , description:""}}
+              initialValues={{
+                email: "",
+                password: "",
+                userName: "",
+                description: "",
+              }}
               validationSchema={RegisterSchema}
               onSubmit={(values, { setSubmitting }) => {
                 dispatch(registerAction(values));
