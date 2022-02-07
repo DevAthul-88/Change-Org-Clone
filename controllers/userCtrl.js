@@ -1,7 +1,5 @@
 require("dotenv").config();
 const bcrypt = require("bcrypt");
-const res = require("express/lib/response");
-const jwt = require("jsonwebtoken");
 const userSchema = require("../model/userModel");
 const generateToken = require("../token/token");
 const { loginSchema, registerSchema } = require("../validate/auth");
@@ -9,7 +7,7 @@ const { loginSchema, registerSchema } = require("../validate/auth");
 const userCtrl = {
   register: async (req, res) => {
     try {
-      const { userName, email, password } = req.body;
+      const { userName, email, password , description } = req.body;
 
       const value = await registerSchema.validate({
         userName: userName,
@@ -28,6 +26,7 @@ const userCtrl = {
       const user = new userSchema({
         userName: userName,
         email: email,
+        description: description,
         password: hashedPassword,
       });
       user.save();
@@ -80,7 +79,6 @@ const userCtrl = {
         userName: userName,
         description:desc,
       };
-      console.log(req.body);
       await userSchema.updateOne({ _id: id }, user);
 
       const data = await userSchema.findOne({ _id: id });

@@ -1,7 +1,6 @@
 const joi = require("joi");
 const registerSchema = joi.object({
     userName: joi.string()
-    .alphanum()
     .min(3)
     .max(30)
     .required(),
