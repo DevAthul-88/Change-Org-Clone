@@ -79,12 +79,13 @@ module.exports = {
   addComment: async (req, res) => {
     try {
       const { userName, _id } = req.user;
-      const { id, message } = req.body;
+      const { id, message , display } = req.body;
 
       const comment = {
         user: userName,
         id: _id,
         message: message,
+        display: display,
         createdAt: Date.now()
       };
 

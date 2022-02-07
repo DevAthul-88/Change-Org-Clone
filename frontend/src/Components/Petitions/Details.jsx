@@ -13,7 +13,7 @@ function Details({ data, loading, userInfo }) {
   const [exists, setExists] = useState(false);
   const [check, setCheck] = useState(false);
   const [comment, setComment] = useState("");
-
+  const [ano  , setAno] = useState(true)
   useEffect(() => {
     if (data && userInfo) {
       const checkExists = data.supporters.some((e) => e.id == userInfo._id);
@@ -42,6 +42,7 @@ function Details({ data, loading, userInfo }) {
     const messageObj = {
       message: message,
       id: data._id,
+      display:ano
     };
     dispatch(commentAction(messageObj));
   };
@@ -71,7 +72,8 @@ function Details({ data, loading, userInfo }) {
               <div className=" col-8">
                 {data.completed ? (
                   <div className="alert alert-success">
-                    <div className="alert-heading fs-5">Well done!</div>
+                    <div className="alert-heading fs-5 fw-bold">Well done!</div>
+                    <hr />
                     <p className="mt-2 fs-5">
                       Author of this petition has declared this petition was
                       victorious
@@ -130,102 +132,131 @@ function Details({ data, loading, userInfo }) {
                     ></div>
                   </div>
                   <hr />
-                  <div className="mt-4">
-                    {check ? (
-                      <div>
-                        {data.completed ? (
-                          <div className="alert alert-success" role="alert">
-                            <h4 className="alert-heading">Well done!</h4>
-                            <p>
-                              This petition made change with{" "}
-                              {data.supporters.length} supporters!
-                            </p>
-                            <hr />
-                            <p className="mb-0">
-                              Author of this petition has declared this petition
-                              was victorious
-                            </p>
-                          </div>
-                        ) : null}
-                      </div>
-                    ) : (
-                     <>
-                     {userInfo == undefined ? null : (
+                  {data.completed ? null : (
+                    <div className="mt-4">
+                      {check ? (
                         <div>
-                        {Object.keys(userInfo).length !== 0 ? (
-                          <div>
-                            {!exists ? (
-                              <form onSubmit={onSubmit}>
-                                <h1 className="fs-2">{userInfo.userName}</h1>
-                                <textarea
-                                  className="form-control mt-3"
-                                  cols={20}
-                                  rows={5}
-                                  name="comment"
-                                  value={message}
-                                  onChange={onChange}
-                                  placeholder="I am signing because....."
-                                  required
-                                ></textarea>
-                                <button
-                                  type="submit"
-                                  className="btn mt-4 btn_red btn-danger"
-                                  disabled={loading}
-                                >
-                                  {loader ? (
-                                    <strong>Loading</strong>
-                                  ) : (
-                                    <strong>Sign this petition</strong>
-                                  )}
-                                </button>
-                              </form>
-                            ) : (
-                              <div>
-                                {comment !== null ? (
-                                  <div className="card mt-4">
-                                    <div className="card-body">
-                                      <div className="card-title rubik">
-                                        <Link
-                                          href={`/profile/${comment._id}`}
-                                          className="text-dark text-decoration-none"
+                          {data.completed ? (
+                            <div className="alert alert-success" role="alert">
+                              <h4 className="alert-heading">Well done!</h4>
+                              <p>
+                                This petition made change with{" "}
+                                {data.supporters.length} supporters!
+                              </p>
+                              <hr />
+                              <p className="mb-0">
+                                Author of this petition has declared this
+                                petition was victorious
+                              </p>
+                            </div>
+                          ) : null}
+                        </div>
+                      ) : (
+                        <>
+                          {userInfo == undefined ? null : (
+                            <div>
+                              {Object.keys(userInfo).length !== 0 ? (
+                                <div>
+                                  {!exists ? (
+                                    <form onSubmit={onSubmit}>
+                                      <h1 className="fs-2">
+                                        {userInfo.userName}
+                                      </h1>
+                                      <textarea
+                                        className="form-control mt-3"
+                                        cols={20}
+                                        rows={5}
+                                        name="comment"
+                                        value={message}
+                                        onChange={onChange}
+                                        placeholder="I am signing because....."
+                                        required
+                                      ></textarea>
+                                      <div class="form-check mt-4">
+                                        <input
+                                          class="form-check-input"
+                                          type="checkbox"
+                                          value="true"
+                                          id="flexCheckDefault"
+                                          onClick={() => setAno(!ano)}
+                                          checked={ano}
+                                        />
+                                        <label
+                                          class="form-check-label"
+                                          for="flexCheckDefault"
                                         >
-                                          {comment.user}
-                                        </Link>
+                                          Display my name on the comment?
+                                        </label>
                                       </div>
-                                      <h6 className="card-subtitle mb-2 text-muted">
-                                        {timeago.format(comment.createdAt)}
-                                      </h6>
-                                      <p>{comment.message}</p>
-                                    </div>
-                                    <div className="card footer">
-                                      <button className={`btn btn-danger btn-sm ${data.completed ? 'disabled' : ''}`}>
-                                        {data.completed ? (
-                                          <strong>You can't remove sign after declaring victory</strong>
+                                      <button
+                                        type="submit"
+                                        className="btn mt-4 btn_red btn-danger"
+                                        disabled={loading}
+                                      >
+                                        {loader ? (
+                                          <strong>Loading</strong>
                                         ) : (
-                                          <strong
-                                            className="rubik"
-                                            onClick={() =>
-                                              handleRemove(data._id)
-                                            }
-                                          >
-                                            Remove Sign
-                                          </strong>
+                                          <strong>Sign this petition</strong>
                                         )}
                                       </button>
+                                    </form>
+                                  ) : (
+                                    <div>
+                                      {comment !== null ? (
+                                        <div className="card mt-4">
+                                          <div className="card-body">
+                                            <div className="card-title rubik">
+                                              <Link
+                                                href={`/profile/${comment._id}`}
+                                                className="text-dark text-decoration-none"
+                                              >
+                                                {comment.user}
+                                              </Link>
+                                            </div>
+                                            <h6 className="card-subtitle mb-2 text-muted">
+                                              {timeago.format(
+                                                comment.createdAt
+                                              )}
+                                            </h6>
+                                            <p>{comment.message}</p>
+                                          </div>
+                                          <div className="card footer">
+                                            <button
+                                              className={`btn btn-danger btn-sm ${
+                                                data.completed ? "disabled" : ""
+                                              }`}
+                                            >
+                                              {data.completed ? (
+                                                <strong>
+                                                  You can't remove sign after
+                                                  declaring victory
+                                                </strong>
+                                              ) : (
+                                                <strong
+                                                  className="rubik"
+                                                  onClick={() =>
+                                                    handleRemove(data._id)
+                                                  }
+                                                >
+                                                  Remove Sign
+                                                </strong>
+                                              )}
+                                            </button>
+                                          </div>
+                                        </div>
+                                      ) : (
+                                        <Loader />
+                                      )}
                                     </div>
-                                  </div>
-                                ) : (
-                                  <Loader />
-                                )}
-                              </div>
-                            )}
-                          </div>
-                        ) : null}
-                      </div>
-                     )}
-                     </>
-                    )}
-                  </div>
+                                  )}
+                                </div>
+                              ) : null}
+                            </div>
+                          )}
+                        </>
+                      )}
+                    </div>
+                  )}
                 </div>
               </div>
             </div>

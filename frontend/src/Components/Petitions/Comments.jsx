@@ -34,7 +34,7 @@ function Comments({ loading, data }) {
                       href={`/profile/${e.id}`}
                       className="text-dark text-decoration-none"
                     >
-                      {e.user}
+                      {e.display ? e.user : "Anonymous"}
                     </Link>
                   </h5>
                   <h6 className="card-subtitle mb-2 text-muted">
