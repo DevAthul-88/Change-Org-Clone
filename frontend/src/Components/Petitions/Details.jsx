@@ -6,6 +6,8 @@ import * as timeago from "timeago.js";
 import Loader from "../Loader";
 import { useState } from "react";
 import cat from "../../data/category";
+import axios from "axios";
+import config from '../../Config/header';
 
 function Details({ data, loading, userInfo }) {
   const { loader, messages, errors } = useSelector((state) => state.comment);
@@ -13,7 +15,7 @@ function Details({ data, loading, userInfo }) {
   const [exists, setExists] = useState(false);
   const [check, setCheck] = useState(false);
   const [comment, setComment] = useState("");
-  const [ano  , setAno] = useState(true)
+  const [ano, setAno] = useState(true);
   useEffect(() => {
     if (data && userInfo) {
       const checkExists = data.supporters.some((e) => e.id == userInfo._id);
@@ -42,7 +44,7 @@ function Details({ data, loading, userInfo }) {
     const messageObj = {
       message: message,
       id: data._id,
-      display:ano
+      display: ano,
     };
     dispatch(commentAction(messageObj));
   };
@@ -50,6 +52,15 @@ function Details({ data, loading, userInfo }) {
   const filter = (id) => {
     const name = cat.filter((e) => e.key === id);
     return name[0].name;
+  };
+
+  const deletePet = async () => {
+    if (window.confirm("Are you sure you want to delete this petition")) {
+       const res = await   axios.delete("/api/petition/delete/"+data._id , config)
+       if(res.data.status){
+         window.location.href = '/'
+       }
+    }
   };
 
   return (
@@ -178,12 +189,12 @@ function Details({ data, loading, userInfo }) {
                                           type="checkbox"
                                           value="true"
                                           id="flexCheckDefault"
-                                          onClick={() => setAno(!ano)}
+                                          onChange={() => setAno(!ano)}
                                           checked={ano}
                                         />
                                         <label
                                           class="form-check-label"
-                                          for="flexCheckDefault"
+                                          htmlFor="flexCheckDefault"
                                         >
                                           Display my name on the comment?
                                         </label>
@@ -257,6 +268,11 @@ function Details({ data, loading, userInfo }) {
                       )}
                     </div>
                   )}
+                  {check ? (
+                    <button className="btn btn-danger" onClick={() => deletePet()}>
+                      <strong>Remove petition</strong>
+                    </button>
+                  ) : null}
                 </div>
               </div>
             </div>

@@ -31,7 +31,7 @@ function Comments({ loading, data }) {
                 <div className="card-body">
                   <h5 className="card-title rubik">
                     <Link
-                      href={`/profile/${e.id}`}
+                      href={e.display ? `/profile/${e.id}` : "#"}
                       className="text-dark text-decoration-none"
                     >
                       {e.display ? e.user : "Anonymous"}

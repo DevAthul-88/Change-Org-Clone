@@ -211,4 +211,15 @@ module.exports = {
       res.json({ error: error.message });
     }
   },
+  deletePetition: async (req, res) => {
+    try {
+      const {id} = req.params
+      const del = await petitionSchema.deleteOne({_id:id})
+      if(del.deletedCount == 1){
+        res.json({status: true})
+      }
+    } catch (error) {
+      res.json({ error: error.message });
+    }
+  }
 };
