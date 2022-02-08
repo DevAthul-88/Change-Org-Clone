@@ -24,7 +24,7 @@ function Index() {
           {loading ? (
             <Loader />
           ) : !data || data == undefined ? (
-            <h1>Nothing found</h1>
+            <h1 className="text-center rubik fw-bold">Nothing found</h1>
           ) : data.message ? (
             <h1 className=" display-5  fs-bold rubik">{data.message}</h1>
           ) : (

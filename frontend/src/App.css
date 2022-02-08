@@ -24,7 +24,7 @@
 
 @media screen and (min-width:991px){
     #indexHeader{
-        background: url('https://static.change.org/home/illustration-world-map-2015-08-18.gif');
+        background: url('./image//illustration-world-map-2015-08-18.webp');
         background-repeat: no-repeat;
         background-position:center;
         background-size: cover;
