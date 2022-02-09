@@ -6,7 +6,7 @@ const petitionRoute = require("./routes/petitionRoute");
 const mongoose = require("mongoose");
 
 app.use(express.json());
-
+app.use(express.urlencoded({extended: true})); 
 app.use("/api/user", userRoute);
 app.use("/api/petition", petitionRoute);
 
