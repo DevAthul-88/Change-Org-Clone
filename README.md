@@ -52,7 +52,7 @@ If you'd like to request a new function, feel free to do so by opening an issue 
 - [MongoDB](https://docs.mongodb.com/) - 
 MongoDB is a source-available cross-platform document-oriented database program
 - [Express.Js](http://expressjs.com/) - Express.js, or simply Express, is a back end web application framework for Node.js,
-- [Reudx](https://redux.js.org/) - Redux helps you write applications that behave consistently ; Centralized. Centralizing your application's state and logic enables powerful
+- [Redux](https://redux.js.org/) - Redux helps you write applications that behave consistently ; Centralized. Centralizing your application's state and logic enables powerful
 
 
 
