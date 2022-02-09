@@ -7,6 +7,7 @@ import Post from "../Components/Post/Post";
 import Loader from "../Components/Loader";
 
 function Index() {
+  window.document.title = 'Change'
   const dispatch = useDispatch();
   const { loading, error, data } = useSelector((state) => state.all);
 

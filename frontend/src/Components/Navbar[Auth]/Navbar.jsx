@@ -45,7 +45,7 @@ function Navbar() {
           </Link>
         </li>
         <li className="nav-item">
-          <a className="nav-link " href="#">Help</a>
+          <a className="nav-link " href="https://github.com/DevAthul-88/Change-Org-Clone" target={"_blank"}>Help</a>
         </li>
       </ul>
 

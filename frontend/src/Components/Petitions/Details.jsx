@@ -66,7 +66,7 @@ function Details({ data, loading, userInfo }) {
   return (
     <div>
       {data == null || data == undefined ? (
-        <h1 className="text-center rubik fw-bold">Nothing found</h1>
+        <Loader />
       ) : (
         <div>
           {loading ? (

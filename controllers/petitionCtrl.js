@@ -31,6 +31,7 @@ module.exports = {
           id: id,
           message: message,
           createdAt: Date.now(),
+          display:true
         },
         user: {
           userName: req.user.userName,
@@ -86,7 +87,7 @@ module.exports = {
         id: _id,
         message: message,
         display: display,
-        createdAt: Date.now()
+        createdAt: Date.now(),
       };
 
       await petitionSchema.updateOne(
@@ -128,7 +129,7 @@ module.exports = {
   },
   popular: async (req, res) => {
     try {
-      const data = await petitionSchema.find().sort({ supporters: 1 });
+      const data = await petitionSchema.find().sort({ supporters: -1 });
       if (data.length < 1) return res.json({ message: "Nothing found" });
       res.json(data);
     } catch (error) {
@@ -137,7 +138,7 @@ module.exports = {
   },
   recent: async (req, res) => {
     try {
-      const data = await petitionSchema.find().sort({ createdAt: 1 });
+      const data = await petitionSchema.find().sort({ createdAt: -1 });
       if (data.length < 1) return res.json({ message: "Nothing found" });
       res.json(data);
     } catch (error) {
