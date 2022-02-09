@@ -10,7 +10,7 @@ This is a clone web application of a famous petition platform called Change-org
 
 
 ## Demo
-Here is a working live demo :  #
+Here is a working live demo :  https://change-o.herokuapp.com/
 
 
 ## Site
