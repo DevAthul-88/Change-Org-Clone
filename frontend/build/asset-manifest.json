@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/static/css/main.1f5f59bc.css",
+    "main.js": "/static/js/main.0b7650b2.js",
+    "static/media/notfound.png": "/static/media/notfound.12432f5679f658692968.png",
+    "static/media/illustration-world-map-2015-08-18.webp": "/static/media/illustration-world-map-2015-08-18.13cd6ad03db491d0e23e.webp",
+    "static/media/unauth.png": "/static/media/unauth.e0af3f44f3aa8a5a0424.png",
+    "static/media/nothing.png": "/static/media/nothing.ce19ebb74b21a3f02870.png",
+    "index.html": "/index.html",
+    "main.1f5f59bc.css.map": "/static/css/main.1f5f59bc.css.map",
+    "main.0b7650b2.js.map": "/static/js/main.0b7650b2.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1f5f59bc.css",
+    "static/js/main.0b7650b2.js"
+  ]
+}
